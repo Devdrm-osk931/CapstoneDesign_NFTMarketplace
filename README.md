@@ -1,9 +1,9 @@
 # CapstoneDesign_NFTMarketplace
 Design NFT Marketplace
 
+
 After cloning project, install dependencies using
 - npm install
-
 
 
 To start webapp
