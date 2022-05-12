@@ -5,7 +5,7 @@ After cloning project, install dependencies using
 - npm install
 
 To start webapp
-- 0. Run local blockchain network using Ganache
-- 1. Compile smart contract
-- 2. Deploy the contract to local blockchain
-- 3. run "npm start" at client directory
+- 1. Run local blockchain network using Ganache
+- 2. Compile smart contract
+- 3. Deploy the contract to local blockchain
+- 4. run "npm start" at client directory
