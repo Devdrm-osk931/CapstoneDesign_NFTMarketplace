@@ -2,7 +2,7 @@
 Design NFT Marketplace
 
 
-After cloning project, install dependencies using
+After cloning project, goto client directory and download dependencies
 - npm install
 
 
