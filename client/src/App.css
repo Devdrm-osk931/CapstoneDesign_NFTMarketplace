@@ -39,3 +39,28 @@
 .component-spacing {
   margin-top: 1.2cm;
 }
+
+#detail__image{
+	max-width: 100%;
+	height: auto;
+	display: block;
+	border: 1px solid black;
+}
+
+.deil__button{
+	width: 100px;
+	height: 50px;
+}
+
+.profile{
+  margin-top: 5%;
+  height: 30%;
+  line-height: 100%;
+  margin-bottom: 5%;
+}
+
+.Mypage__button{
+  position: relative;
+  right: 30%;
+}
+

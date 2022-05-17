@@ -6,7 +6,7 @@ import OnSale from "./OnSale";
 function DisplayJackets(props) {
     return (
         <div className="component-spacing">
-            <h2>On Sale NFTs</h2>
+            {/* <h2>On Sale NFTs</h2> */}
             <br/>
             <div className="setmid">
             <div className="set mid col-md-12">
@@ -18,7 +18,9 @@ function DisplayJackets(props) {
                 <a href={'./detail/' + index}><OnSale index = {index} src = {index.toString() + ".png"}/></a>
                 <br/>
                 <h5>#{index} NFT</h5><br/>
-                <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>{' '}<Button variant="outline-warning">Buy</Button><br/><br/>
+                <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>
+                {' '}
+                <Button variant="outline-warning">Buy</Button><br/><br/>
                 </Col>)
                 })}
                 {/* return <Col><OnSale index = {index} src = {index.toString() + ".png"}/><p></p></Col> */}

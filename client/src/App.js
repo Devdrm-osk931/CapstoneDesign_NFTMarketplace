@@ -5,6 +5,9 @@ import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form} from "r
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DisplayJackets from "./DisplayJackets";
 import DetailPage from "./DetailPage";
+import Detail from "./Detail";
+import Mypage from './Mypage';
+import Minting from './Minting';
 
 // const jacket_ids = Array(14).fill().map((v,i)=> i+1);
 
@@ -71,12 +74,13 @@ class App extends Component {
               <Nav.Link href="/">Explore<span>🔎</span></Nav.Link>
               <Nav.Link href="#link">AboutUs<span>📕</span></Nav.Link>
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
-                <NavDropdown.Item eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
+                <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link href="/minting/">Minting<span> 📲 </span></Nav.Link>
             </Nav>
             <Form className="d-flex">
             <FormControl
@@ -94,7 +98,9 @@ class App extends Component {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<DisplayJackets array = {this.state.sale_jackets}/>}></Route>
-        <Route path="/detail/:id" element = {<DetailPage src = {this.state.gateway}/>}></Route>
+        <Route path="/detail/:id" element = {<Detail src = {this.state.gateway}/>}></Route>
+        <Route path ="/mypage/" element ={<Mypage account ={this.state.accounts} array={this.state.sale_jackets}/>}></Route>
+        <Route path ="/minting/" element ={<Minting/>}></Route>
       </Routes>
       </BrowserRouter>
 
