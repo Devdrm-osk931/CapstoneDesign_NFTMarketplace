@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
+import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form} from "react-bootstrap";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import DisplayJackets from "./DisplayJackets";
+import DetailPage from "./DetailPage";
 
-import "./App.css";
+// const jacket_ids = Array(14).fill().map((v,i)=> i+1);
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, balance: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null };
 
   componentDidMount = async () => {
     try {
@@ -15,6 +19,9 @@ class App extends Component {
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0])
+      const sale_jackets = Array(30).fill().map((v,i)=> i+1)
+      const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
+
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -26,7 +33,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, balance, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, balance, contract: instance, sale_jackets, gateway }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -40,13 +47,13 @@ class App extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    // await contract.methods.set(5).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    // const response = await contract.methods.get().call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
+    // this.setState({ storageValue: response });
   };
 
   render() {
@@ -55,19 +62,49 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          <p>{this.state.accounts[0]}</p>
-          <p>{this.state.balance}</p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+        <Navbar className="navbar-custom" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">OnlyOneOnes</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/">Explore<span>🔎</span></Nav.Link>
+              <Nav.Link href="#link">AboutUs<span>📕</span></Nav.Link>
+              <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
+                <NavDropdown.Item eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="검색기능x"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DisplayJackets array = {this.state.sale_jackets}/>}></Route>
+        <Route path="/detail/:id" element = {<DetailPage src = {this.state.gateway}/>}></Route>
+      </Routes>
+      </BrowserRouter>
+
+      {/* <div className="component-spacing">
+      <DisplayJackets array = {this.state.sale_jackets}/>
+      </div>
+
+      <footer>
+        <h2>This is footer</h2>
+      </footer> */}
       </div>
     );
   }

@@ -20,3 +20,22 @@
 .App-link {
   color: #09d3ac;
 }
+
+.ipfsimg {
+  height: 200px;
+  width: 200px;
+}
+
+.setmid {
+  display: inline-block;
+  width: 80%;
+
+}
+
+.navbar-custom {
+  background-color: #E5CB9F;
+}
+
+.component-spacing {
+  margin-top: 1.2cm;
+}
