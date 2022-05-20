@@ -1,6 +1,8 @@
 # CapstoneDesign_NFTMarketplace
 Design NFT Marketplace
 
+This is boilerplate provided by Truffle-Suite for convenient DAPP development.
+
 
 After cloning project, goto client directory and download dependencies
 - npm install
