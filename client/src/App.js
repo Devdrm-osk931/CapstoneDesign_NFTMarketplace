@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import Jacket from "./contracts/Jacket.json";
 import getWeb3 from "./getWeb3";
 import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form} from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -28,9 +28,9 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = Jacket.networks[networkId];
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
+        Jacket.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
@@ -57,6 +57,9 @@ class App extends Component {
 
     // Update state with the result.
     // this.setState({ storageValue: response });
+    await contract.methods.set(5).send({ from: accounts[0] });
+    const response = await contract.methods.get().call();
+    this.setState({storageValue: response})
   };
 
   render() {
@@ -73,6 +76,7 @@ class App extends Component {
             <Nav className="me-auto">
               <Nav.Link href="/">Explore<span>🔎</span></Nav.Link>
               <Nav.Link href="#link">AboutUs<span>📕</span></Nav.Link>
+              <Nav.Link href="/minting/">Minting<span> 📲 </span></Nav.Link>
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -80,7 +84,6 @@ class App extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/minting/">Minting<span> 📲 </span></Nav.Link>
             </Nav>
             <Form className="d-flex">
             <FormControl
@@ -94,6 +97,7 @@ class App extends Component {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <h1>{this.state.storageValue}</h1>
 
       <BrowserRouter>
       <Routes>
