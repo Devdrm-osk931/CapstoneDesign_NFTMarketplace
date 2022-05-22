@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import OnSale from "./OnSale";
 
 function DisplayJackets(props) {
+
     return (
         <div className="component-spacing">
             {/* <h2>On Sale NFTs</h2> */}
@@ -20,11 +21,10 @@ function DisplayJackets(props) {
                 <h5>#{index} NFT</h5><br/>
                 <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>
                 {' '}
-                <Button variant="outline-warning">Buy</Button><br/><br/>
+                <Button variant="outline-warning">{props.type}</Button><br/><br/>
                 </Col>)
                 })}
                 {/* return <Col><OnSale index = {index} src = {index.toString() + ".png"}/><p></p></Col> */}
-
                 </Row>
             </Container>
             </div>

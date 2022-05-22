@@ -19,7 +19,7 @@ function Mypage(props) {
 				<br></br>
 			</div>
 			<div>
-			<DisplayJackets array = {props.array} />
+			<DisplayJackets array = {props.array} type = {props.type}/>
 			</div>
 		</div>
 	);

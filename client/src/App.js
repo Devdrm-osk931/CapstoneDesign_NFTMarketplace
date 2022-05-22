@@ -12,7 +12,7 @@ import Minting from './Minting';
 // const jacket_ids = Array(14).fill().map((v,i)=> i+1);
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null };
+  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null };
 
   componentDidMount = async () => {
     try {
@@ -33,6 +33,7 @@ class App extends Component {
         Jacket.abi,
         deployedNetwork && deployedNetwork.address,
       );
+
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -57,9 +58,14 @@ class App extends Component {
 
     // Update state with the result.
     // this.setState({ storageValue: response });
-    await contract.methods.set(5).send({ from: accounts[0] });
-    const response = await contract.methods.get().call();
+    // await contract.methods.set(5).send({ from: accounts[0] });
+    // const response = await contract.methods.totalSupply().call();
+
+    const response = await contract.methods.totalSupply().call();
     this.setState({storageValue: response})
+
+
+
   };
 
   render() {
@@ -98,15 +104,16 @@ class App extends Component {
         </Container>
       </Navbar>
       <h1>{this.state.storageValue}</h1>
-
+      <h1>{}</h1>
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DisplayJackets array = {this.state.sale_jackets}/>}></Route>
+        <Route path="/" element={<DisplayJackets array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
         <Route path="/detail/:id" element = {<Detail src = {this.state.gateway}/>}></Route>
-        <Route path ="/mypage/" element ={<Mypage account ={this.state.accounts} array={this.state.sale_jackets}/>}></Route>
-        <Route path ="/minting/" element ={<Minting/>}></Route>
+        <Route path ="/mypage/" element ={<Mypage account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
+        <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
       </Routes>
       </BrowserRouter>
+
 
       {/* <div className="component-spacing">
       <DisplayJackets array = {this.state.sale_jackets}/>
