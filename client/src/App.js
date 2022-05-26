@@ -7,6 +7,8 @@ import DisplayJackets from "./DisplayJackets";
 import Detail from "./Detail";
 import Mypage from './Mypage';
 import Minting from './Minting';
+import Contact from "./Contact";
+import AboutUs from "./AboutUs";
 
 
 
@@ -102,8 +104,9 @@ class App extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Explore<span>🔎</span></Nav.Link>
-              <Nav.Link href="#link">AboutUs<span>📕</span></Nav.Link>
-              <Nav.Link href="/minting/">Minting<span> 📲 </span></Nav.Link>
+              <Nav.Link href="/aboutus">AboutUs<span>📕</span></Nav.Link>
+              <Nav.Link href="/contact">ContactUs<span>📞</span></Nav.Link>
+              <Nav.Link href="/minting">Minting<span> 📲 </span></Nav.Link>
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -115,14 +118,16 @@ class App extends Component {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h1>{this.state.storageValue} / 100</h1>
-      <h1>{this.state.contractAddress}</h1>
+      {/* <h1>{this.state.storageValue} / 100</h1>
+      <h1>{this.state.contractAddress}</h1> */}
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<DisplayJackets contract = {this.state.contract} array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
         <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
         <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
+        <Route path = "/contact" element = {<Contact/>}></Route>
+        <Route path = "/aboutus" element = {<AboutUs/>}></Route>
       </Routes>
       </BrowserRouter>
 

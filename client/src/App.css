@@ -66,7 +66,9 @@
 }
 
 .navbar-custom {
-  background-color: #E5CB9F;
+  background-color: #f7f7f7;
+  max-width: 88.2%;
+  margin: auto;
 }
 
 .component-spacing {
@@ -96,8 +98,9 @@
 }
 
 .Mypage__button{
-  position: relative;
-  right: 30%;
+  position: center;
+  margin-top: 12px;
+  /* right: 30%; */
 }
 
 /* minting */
@@ -115,4 +118,24 @@
 
 .Onsale img{
 	transition: all ease;
+}
+
+
+.profile-user-img-img{
+	width:14%;
+	height:14%; 
+	border-radius: 100%;
+	margin-top: 20px;
+	object-fit: cover;
+  }
+
+.profile-align-center{
+width: 80%; 
+margin-left: 10%;
+background-color:#F7F5F2;
+}
+
+.AboutUs-font{
+font-Weight: 500; 
+font-Size: 1.5em;
 }

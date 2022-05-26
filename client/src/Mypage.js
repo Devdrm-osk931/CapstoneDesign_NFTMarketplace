@@ -50,25 +50,67 @@ function Mypage(props) {
 	const [my_array, set_array] = useState([])
 	const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/";
 
+	// return (
+	// 	<div className ='Mypage'>
+	// 		<div className='profile'>
+	// 			{<p> account : {props.account} </p>}
+	// 			<h4> My Page </h4>
+	// 		</div>
+	// 		<div className='Mypage__button'>
+	// 			<Button variant="outline-warning" onClick= {(event) => {
+	// 				event.preventDefault()
+	// 				check_array()
+	// 				}}>All</Button>
+	// 			{' '}
+	// 			<Button variant="outline-warning" onClick={Onsale}>On Sale</Button>
+	// 			<br></br>
+	// 			<br></br>
+	// 		</div>
+	// 		<div>
+	// 		<DisplayJackets array = {my_array} type = {props.type}/>
+	// 		</div>
+	// 	</div>
+	// );
+
 	return (
 		<div className ='Mypage'>
-			<div className='profile'>
-				{<p> account : {props.account} </p>}
-				<h4> My Page </h4>
-			</div>
-			<div className='Mypage__button'>
-				<Button variant="outline-warning" onClick= {(event) => {
-					event.preventDefault()
-					check_array()
-					}}>All</Button>
-				{' '}
-				<Button variant="outline-warning" onClick={Onsale}>On Sale</Button>
-				<br></br>
-				<br></br>
-			</div>
-			<div>
-			<DisplayJackets array = {my_array} type = {props.type}/>
-			</div>
+			<Container style={{padding: '0px'}}>
+				<div>
+					<img src={ require('./image/mypage.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+				</div>
+			</Container>
+
+			<Container fluid>
+				<Col>
+					<h1>   </h1>
+					<h1>   </h1>
+				</Col>
+			</Container>
+
+			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '20px' , background: '#f7f7f7'}}>
+				<div class = "profile-user-img">
+					<img src={ require('./image/profile.png') } alt="profile-user-img" class="profile-user-img-img"/>
+				</div>
+				<br/>
+				<h1>User1</h1>
+				<h5>Connected account : {props.account} </h5>
+			</Container>
+
+			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '20px' }}>
+				<h4>My NFTs</h4>
+				<div className='Mypage__button'>
+						<Button variant="outline-warning" onClick= {(event) => {
+						event.preventDefault()
+						check_array()
+	 					}}>All</Button>
+						{' '}
+						<Button variant="outline-warning" onClick={Onsale}>On Sale</Button>
+				</div>
+				<div>
+					<DisplayJackets array = {my_array} type = {props.type} />
+				</div>
+			</Container>
+
 		</div>
 	);
 }
