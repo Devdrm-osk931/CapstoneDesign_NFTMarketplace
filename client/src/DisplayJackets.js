@@ -7,7 +7,7 @@ function DisplayJackets(props) {
 
     const ClickBuy = () => {
 		if (window.confirm("confirm on buy")) {
-			if(this.props.type=="buy") alert("buy");
+			if(props.type=="buy") alert("buy");
 			else alert("Sell");
 		} else {
 		alert("Cancel");

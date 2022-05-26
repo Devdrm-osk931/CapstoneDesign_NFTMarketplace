@@ -8,7 +8,7 @@ import Detail from "./Detail";
 import Mypage from './Mypage';
 import Minting from './Minting';
 
-// const jacket_ids = Array(14).fill().map((v,i)=> i+1);
+
 
 class App extends Component {
   state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null, contractAddress: null};
@@ -112,24 +112,15 @@ class App extends Component {
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="검색기능x"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <h1>{this.state.storageValue} / 100</h1>
-      <h1>{}</h1>
+      <h1>{this.state.contractAddress}</h1>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<DisplayJackets contract = {this.state.contract} array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
-        <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState}/>}></Route>
+        <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
         <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
       </Routes>

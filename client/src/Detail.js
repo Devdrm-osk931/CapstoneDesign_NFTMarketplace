@@ -2,12 +2,16 @@ import './App.css';
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { renderMatches, useParams } from 'react-router-dom'
+import getWeb3 from "./getWeb3";
+import Web3 from 'web3';
+import Mypage from './Mypage';
 
 // axios.get(https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/40.json,[,config])
 // .then((Response)=>{console.log(Response.data)})
 //   .catch((Error)=>{console.log(Error)})
 
 function Detail(props) {
+
 	const {id}=useParams();
 
 	const nft_sell = async() =>{
@@ -18,15 +22,36 @@ function Detail(props) {
 
 	const clickBuy = async() => {
 		const ownerAddress = await props.contract.methods.ownerOf(id).call();
+		const myAddress = props.account;
+		const price = await props.contract.methods.nftTokenPrices(id).call();
+		const weiPrice = Web3.utils.toWei(price);
+		const isApproved = await props.contract.methods.isApprovedForAll(ownerAddress, props.contractAddress).call();
+		console.log(isApproved);
+		console.log(props.ApprovalState);
+		console.log("Owner: ", ownerAddress);
+		console.log("Contract: ", props.contractAddress);
+		console.log(price);
+		console.log(weiPrice);
 		if(props.account === ownerAddress)
 				alert("token owner can't buy");
 
 		else if (window.confirm("confirm on buy")) {
 
-			if(!props.ApprovalState)
+			// if(!props.ApprovalState)
+			if(!isApproved)
 				alert("approveState is false");
 			else
 				alert("buy");
+				try {
+					const response = await props.contract.methods.buyNftToken(id).send({ from: props.account, value: weiPrice });
+
+					if(response.status) {
+						window.location.replace("/mypage");
+					}
+				} catch(err) {
+					console.log(err);
+					throw err;
+				}
 		}
 		else {
 		  alert("Cancel");
