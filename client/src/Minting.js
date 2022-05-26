@@ -15,12 +15,13 @@ const Minting = (props) => {
 		props.contract.methods.mint().send({ from: props.account })
 		.once('receipt', (receipt) => {
 			setmessage('minting success')
+			window.location.reload()
 		})
 	}
 
 	const supply = async () => {
 		const temp = await props.contract.methods.totalSupply().call();
-		settot({temp});
+		settot(temp);
 	}
 	return(
 		<div>
