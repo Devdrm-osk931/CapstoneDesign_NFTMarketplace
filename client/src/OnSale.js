@@ -7,12 +7,12 @@ function OnSale(props) {
     const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
     // const url = "./" + props.index.toString()
     return(
-        <div>
+        <div className='Onsale'>
             <img className="ipfsimg" src = {gateway + props.src} />
             {/* <p>{gateway+props.src}</p> */}
             {/* <img className="ipfsimg" src = {gateway + "1.png"} /> */}
 
-            
+
             {/* <Card style={{ width: '13rem' }}>
             <a href={'./' + props.index}><Card.Img className="ipfsimg" variant="top" src= {gateway + props.src}/></a>
             <Card.Body>

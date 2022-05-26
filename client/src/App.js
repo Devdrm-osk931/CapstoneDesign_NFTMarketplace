@@ -4,7 +4,6 @@ import getWeb3 from "./getWeb3";
 import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form} from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DisplayJackets from "./DisplayJackets";
-import DetailPage from "./DetailPage";
 import Detail from "./Detail";
 import Mypage from './Mypage';
 import Minting from './Minting';
@@ -12,7 +11,7 @@ import Minting from './Minting';
 // const jacket_ids = Array(14).fill().map((v,i)=> i+1);
 
 class App extends Component {
-  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null };
+  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null, contractAddress: null};
 
   componentDidMount = async () => {
     try {
@@ -22,13 +21,13 @@ class App extends Component {
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0])
-      const sale_jackets = Array(30).fill().map((v,i)=> i+1)
+      //const sale_jackets = Array(30).fill().map((v,i)=> i+1)
       const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
-
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = Jacket.networks[networkId];
+      const contractAddress = deployedNetwork.address
       const instance = new web3.eth.Contract(
         Jacket.abi,
         deployedNetwork && deployedNetwork.address,
@@ -37,7 +36,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, balance, contract: instance, sale_jackets, gateway }, this.runExample);
+      this.setState({ web3, accounts, balance, contract: instance, gateway, contractAddress }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -48,7 +47,7 @@ class App extends Component {
   };
 
   runExample = async () => {
-    const { accounts, contract } = this.state;
+    const { accounts, contract, contractAddress } = this.state;
 
     // Stores a given value, 5 by default.
     // await contract.methods.set(5).send({ from: accounts[0] });
@@ -62,13 +61,35 @@ class App extends Component {
     // const response = await contract.methods.totalSupply().call();
 
     const response = await contract.methods.totalSupply().call();
-    this.setState({storageValue: response})
+    const tempnftListArray = await contract.methods.getSaleNftTokens().call();
 
+    const nftArray = [];
 
+    for(let i = 0; i < tempnftListArray.length;i++){
+      //_nftTokenId = tempnftListArray[i].nftTokenId;
+	    //_nftTokenURI = tempnftListArray[i].nftTokenURI;
+	    //_price = tempnftListArray[i].price;
+      nftArray.push(Number(tempnftListArray[i].nftTokenId));
+    }
+    console.log(nftArray);
+    this.setState({storageValue: response, sale_jackets: nftArray})
 
   };
 
   render() {
+    const giveapprove = async() =>{
+
+      const ApprovalState = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
+
+      if(ApprovalState === true){
+        alert('이미 권한이 부여되어 있습니다.');
+      }
+
+      else{
+        await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
+      }
+    }
+
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
@@ -86,7 +107,7 @@ class App extends Component {
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Item onClick = {giveapprove}>setApproved</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
@@ -103,13 +124,13 @@ class App extends Component {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h1>{this.state.storageValue}</h1>
+      <h1>{this.state.storageValue} / 100</h1>
       <h1>{}</h1>
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DisplayJackets array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
-        <Route path="/detail/:id" element = {<Detail src = {this.state.gateway}/>}></Route>
-        <Route path ="/mypage/" element ={<Mypage account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
+        <Route path="/" element={<DisplayJackets contract = {this.state.contract} array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
+        <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState}/>}></Route>
+        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
       </Routes>
       </BrowserRouter>

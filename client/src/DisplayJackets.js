@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import OnSale from "./OnSale";
 
 function DisplayJackets(props) {
+
+    const ClickBuy = () => {
+		if (window.confirm("confirm on buy")) {
+			if(this.props.type=="buy") alert("buy");
+			else alert("Sell");
+		} else {
+		alert("Cancel");
+		}
+	}
 
     return (
         <div className="component-spacing">
@@ -19,12 +28,15 @@ function DisplayJackets(props) {
                 <a href={'./detail/' + index}><OnSale index = {index} src = {index.toString() + ".png"}/></a>
                 <br/>
                 <h5>#{index} NFT</h5><br/>
-                <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>
-                {' '}
-                <Button variant="outline-warning">{props.type}</Button><br/><br/>
+                <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>{' '}<Button variant="outline-warning" onClick={(event) =>
+				{
+					event.preventDefault()
+					ClickBuy()
+					}}>{props.type}</Button><br/><br/>
                 </Col>)
                 })}
                 {/* return <Col><OnSale index = {index} src = {index.toString() + ".png"}/><p></p></Col> */}
+
                 </Row>
             </Container>
             </div>

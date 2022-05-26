@@ -9,20 +9,15 @@ import { useState } from 'react';
 
 const Minting = (props) => {
 	const [message, setmessage] = useState('');
-	const [tot, settot] = useState(0);
 
 	const mint = () => {
 		props.contract.methods.mint().send({ from: props.account })
 		.once('receipt', (receipt) => {
+			window.location.replace("/mypage")
 			setmessage('minting success')
-			window.location.reload()
 		})
 	}
 
-	const supply = async () => {
-		const temp = await props.contract.methods.totalSupply().call();
-		settot(temp);
-	}
 	return(
 		<div>
 			<h2> Upload file </h2>
@@ -35,12 +30,6 @@ const Minting = (props) => {
 					mint()
 				}}>Mint!</Button>
 				<h2>{message}</h2>
-
-				<Button onClick = {(event) => {
-					event.preventDefault()
-					supply()
-				}}>Check Total</Button>
-				<h2>{tot}</h2>
 			</div>
 		</div>
 	);

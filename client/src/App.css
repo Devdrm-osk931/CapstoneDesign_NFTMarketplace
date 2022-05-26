@@ -1,3 +1,36 @@
+/* Global */
+:root{
+	/* Color */
+	--color-white: #ffffff;
+	--color-light-white: #eeeeee;
+	--color-dark-white: #bdbdbd;
+	--color-pink: #fe918d;
+	--color-dark-pink: #ff6863;
+	--color-dark-grey: #4d4d4d;
+	--color-grey: #616161;
+	--color-light-grey: #7c7979;
+	--color-blue: #73aace;
+	--color-yellow: #fff7d1;
+	--color-orange: #feb546;
+	--color-black: #000000;
+	/* Font size */
+	--font-large: 48px;
+	--font-medium: 28px;
+	--font-regular: 18px;
+	--font-small: 16px;
+	--font-micro: 14px;
+	/* Font weight */
+	--weight-bold: 700;
+	--weight-semi-bold:600;
+	--weight-regular:400;
+
+	/* Size */
+	--size-border-radius: 4px;
+
+	/* Animation */
+	--animation-delay: 300ms;
+}
+
 .App {
   text-align: center;
 }
@@ -40,6 +73,8 @@
   margin-top: 1.2cm;
 }
 
+/* detail */
+
 #detail__image{
 	max-width: 100%;
 	height: auto;
@@ -52,6 +87,7 @@
 	height: 50px;
 }
 
+/* my page */
 .profile{
   margin-top: 5%;
   height: 30%;
@@ -64,3 +100,19 @@
   right: 30%;
 }
 
+/* minting */
+.Minting{
+  margin: 16px;
+}
+
+/* display */
+.Onsale img:hover{
+  transform: scale(1.1);
+  border: solid 1px var(--color-orange);
+  filter: drop-shadow(1px 1px 1px var(--color-light-grey));
+  transform: translateY(-10px);
+}
+
+.Onsale img{
+	transition: all ease;
+}
