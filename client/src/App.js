@@ -9,8 +9,7 @@ import Mypage from './Mypage';
 import Minting from './Minting';
 import Contact from "./Contact";
 import AboutUs from "./AboutUs";
-
-
+import Main from './main';
 
 class App extends Component {
   state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null, contractAddress: null};
@@ -122,7 +121,7 @@ class App extends Component {
       <h1>{this.state.contractAddress}</h1> */}
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DisplayJackets contract = {this.state.contract} array = {this.state.sale_jackets} type = 'Buy'/>}></Route>
+        <Route path="/" element={<Main array = {this.state.sale_jackets}/>}></Route>
         <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
         <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
