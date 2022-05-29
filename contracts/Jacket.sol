@@ -64,6 +64,7 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
 
     struct NftTokenData {
         uint256 nftTokenId;
+        address nftTokenOwner;
         string nftTokenURI;
         uint256 price;
     }
@@ -82,7 +83,7 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
             uint256 nftTokenId = tokenOfOwnerByIndex(_nftTokenOwner, i);
             string memory nftTokenURI = tokenURI(nftTokenId);
             uint256 tokenPrice = getNftTokenPrice(nftTokenId);
-            nftTokenData[i] = NftTokenData(nftTokenId, nftTokenURI, tokenPrice);
+            nftTokenData[i] = NftTokenData(nftTokenId, _nftTokenOwner, nftTokenURI, tokenPrice);
         }
 
         return nftTokenData;
@@ -119,9 +120,11 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
 
         for (uint256 i = 0; i < onSaleNftToken.length; i++) {
             uint256 tokenId = onSaleNftToken[i];
+            address tokenOwner = ownerOf(tokenId);
             uint256 tokenPrice = getNftTokenPrice(tokenId);
             onSaleNftTokens[i] = NftTokenData(
                 tokenId,
+                tokenOwner,
                 tokenURI(tokenId),
                 tokenPrice
             );
