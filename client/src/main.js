@@ -32,7 +32,7 @@ function Main (props){
     return(
         <div>
             <MainSilde/>
-            <DisplayJackets array = {props.array} type ='Buy'/>
+            <DisplayJackets array = {props.array} account = {props.account} contract = {props.contract} contractAddress = {props.contractAddress} type ={props.type}/>
         </div>
     )
 }

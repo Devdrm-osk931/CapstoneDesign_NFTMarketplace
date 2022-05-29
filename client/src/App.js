@@ -63,14 +63,14 @@ class App extends Component {
 
     const response = await contract.methods.totalSupply().call();
     const tempnftListArray = await contract.methods.getSaleNftTokens().call();
-
-    const nftArray = [];
+    console.log(tempnftListArray);
+    const nftArray = [];  // 현재 판매중인 NFT 리스트 받아옴
 
     for(let i = 0; i < tempnftListArray.length;i++){
       //_nftTokenId = tempnftListArray[i].nftTokenId;
 	    //_nftTokenURI = tempnftListArray[i].nftTokenURI;
 	    //_price = tempnftListArray[i].price;
-      nftArray.push(Number(tempnftListArray[i].nftTokenId));
+      nftArray.push([Number(tempnftListArray[i][0]), tempnftListArray[i][1], Number(tempnftListArray[i][3])]);
     }
     console.log(nftArray);
     this.setState({storageValue: response, sale_jackets: nftArray})
@@ -124,9 +124,9 @@ class App extends Component {
       <h1>{this.state.contractAddress}</h1> */}
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main array = {this.state.sale_jackets}/>}></Route>
+        <Route path="/" element={<Main array = {this.state.sale_jackets} account = {this.state.accounts[0]} contract = {this.state.contract} contractAddress = {this.state.contractAddress} type = 'Main'/>}></Route>
         <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
-        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts} array={this.state.sale_jackets} type = 'Sell'/>}></Route>
+        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts[0]} array={this.state.sale_jackets} contractAddress = {this.state.contractAddress} type = 'MyPage'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
         <Route path = "/contact" element = {<Contact/>}></Route>
         <Route path = "/aboutus" element = {<AboutUs/>}></Route>
