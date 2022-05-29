@@ -12,7 +12,7 @@ function Mypage(props) {
     	for(let i = 1; i <= totalSupply; i++){
       		tot.push(i);
     	}
-		const arr=[]
+		const arr = []
 		for(let tokenId of tot){
 			const tokenOwner = await props.contract.methods.ownerOf(tokenId).call();
 			if(String(tokenOwner) === String(props.account)){
@@ -92,19 +92,22 @@ function Mypage(props) {
 					<img src={ require('./image/profile.png') } alt="profile-user-img" class="profile-user-img-img"/>
 				</div>
 				<br/>
-				<h1>User1</h1>
-				<h5>Connected account : {props.account} </h5>
+				<h1>Your Address 📬</h1>
+				<h5>{props.account}</h5>
 			</Container>
 
 			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '20px' }}>
-				<h4>My NFTs</h4>
+				<h4 style={{marginTop:'10px', marginBottom: '10px'}}>My NFTs</h4>
 				<div className='Mypage__button'>
 						<Button variant="outline-warning" onClick= {(event) => {
 						event.preventDefault()
 						check_array()
 	 					}}>All</Button>
 						{' '}
-						<Button variant="outline-warning" onClick={Onsale}>On Sale</Button>
+						<Button variant="outline-warning" onClick={(event) => {
+							event.preventDefault()
+							Onsale()
+						}}>On Sale</Button>
 				</div>
 				<div>
 					<DisplayJackets array = {my_array} type = {props.type} />

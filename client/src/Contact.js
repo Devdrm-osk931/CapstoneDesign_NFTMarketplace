@@ -60,7 +60,7 @@ const contact= function() {
   }
 
   return (
-  <div>
+  <div className='contact'>
   <GlobalStyles />
 
   {/* <section className='jumbotron breadcumb no-bg' style={{backgroundImage: `url(${'./img/background/subheader.jpg'})`}}> */}
@@ -79,7 +79,7 @@ const contact= function() {
 
       <section className='container'>
         <div className='row'>
-          
+
           <div className='col-lg-8 mb-3'>
           <h3>1:1 Inquiry</h3>
             <div className="form-side">
@@ -96,11 +96,11 @@ const contact= function() {
           </div>
 
           <div className='col-md-4'>
-           
+
            <div className="padding40 box-rounded mb30">
               <h3>Personal Office</h3>
               <address className="s1">
-                <span><i className="id-color fa fa-phone fa-lg"></i><a href="https://www.naver.com">NFT Provider</a></span>               
+                <span><i className="id-color fa fa-phone fa-lg"></i><a href="https://www.naver.com">NFT Provider</a></span>
                 <span><i className="id-color fa fa-phone fa-lg"></i><a href="https://www.naver.com">Front-End Team1</a></span>
                 <span><i className="id-color fa fa-phone fa-lg"></i><a href="https://www.naver.com">Front-End Team2</a></span>
                 <span><i className="id-color fa fa-phone fa-lg"></i><a href ="https://www.naver.com">Back-End Team1</a></span>

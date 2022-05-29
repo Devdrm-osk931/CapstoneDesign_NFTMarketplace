@@ -96,7 +96,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Navbar className="navbar-custom" expand="lg">
+
+        <Navbar className="navbar-custom sticky-top" expand="lg">
         <Container>
           <Navbar.Brand href="/">OnlyOneOnes</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -115,8 +116,10 @@ class App extends Component {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-        </Container>
+          </Container>
       </Navbar>
+
+
       {/* <h1>{this.state.storageValue} / 100</h1>
       <h1>{this.state.contractAddress}</h1> */}
       <BrowserRouter>

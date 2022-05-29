@@ -57,6 +57,9 @@
 .ipfsimg {
   height: 200px;
   width: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10px
 }
 
 .setmid {
@@ -67,7 +70,7 @@
 
 .navbar-custom {
   background-color: #f7f7f7;
-  max-width: 88.2%;
+  max-width: 1150px;
   margin: auto;
 }
 
@@ -109,33 +112,69 @@
 }
 
 /* display */
-.Onsale img:hover{
+/* .Onsale img:hover{
   transform: scale(1.1);
   border: solid 1px var(--color-orange);
   filter: drop-shadow(1px 1px 1px var(--color-light-grey));
   transform: translateY(-10px);
-}
+  border-radius: 8px;
+} */
 
-.Onsale img{
+/* .Onsale img{
 	transition: all ease;
+} */
+
+/* #col:hover{
+	filter: drop-shadow(1px 1px 1px var(--color-light-grey));
+} */
+
+div#display__col:hover{
+	border: solid 1px var(--color-orange);
+	transform: translateY(-10px);
 }
 
+div#display__col{
+	border: solid 1px var(--color-black);
+	border-radius: 8px;
+	margin-bottom: 24px;
+	/* width: 90%; */
+}
 
 .profile-user-img-img{
 	width:14%;
-	height:14%; 
+	height:14%;
 	border-radius: 100%;
 	margin-top: 20px;
 	object-fit: cover;
   }
 
 .profile-align-center{
-width: 80%; 
+width: 80%;
 margin-left: 10%;
 background-color:#F7F5F2;
 }
 
 .AboutUs-font{
-font-Weight: 500; 
+font-Weight: 500;
 font-Size: 1.5em;
 }
+
+/* swiper */
+.banner{
+	margin-top: 30px;
+	border: solid 1px var(--color-black);
+	max-width: 1080px;
+}
+
+/* contact us */
+@media only screen and (max-width: 1199px) {
+    contact.navbar{
+      background: #403f83;
+    }
+    contact.navbar .menu-line, .navbar .menu-line1, .navbar .menu-line2{
+      background: #fff;
+    }
+    contact.item-dropdown .dropdown a{
+      color: #fff !important;
+    }
+  }

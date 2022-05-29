@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-
-
 import "../client/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../client/node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "../client/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -175,7 +173,7 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         removeToken(_tokenId);
     }
 
-    function removeToken(uint256 _tokenId) private {
+    function removeToken(uint256 _tokenId) public {
         nftTokenPrices[_tokenId] = 0;
 
         for (uint256 i = 0; i < onSaleNftTokenArray.length; i++) {
@@ -188,12 +186,8 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         }
     }
 
-    uint storedData;
-
-    function set(uint x) public {
-        storedData = x;
+    function changePrice(uint256 _tokenId, uint256 _price) public {
+        removeToken(_tokenId);
+        setSaleNftToken(_tokenId, _price);
     }
-    function get() public view returns (uint) {
-    return storedData;
-  }
 }

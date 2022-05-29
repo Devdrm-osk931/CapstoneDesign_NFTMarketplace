@@ -1,3 +1,4 @@
+import './App.css';
 import React, { Component } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
@@ -15,12 +16,12 @@ function MainSilde (){
         loop={true}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 1000 }}
+        autoplay={{ delay: 1500 }}
       >
-        <SwiperSlide><img src='img/1.png'/></SwiperSlide>
-        <SwiperSlide><img src= 'img/65.png'/></SwiperSlide>
-        <SwiperSlide><img src='img/99.png'/></SwiperSlide>
-        <SwiperSlide><img src= 'img/main_banner2.png'/></SwiperSlide>
+        <SwiperSlide><img className='banner__img' src='img/1.png'/></SwiperSlide>
+        <SwiperSlide><img className='banner__img' src= 'img/65.png'/></SwiperSlide>
+        <SwiperSlide><img className='banner__img' src='img/99.png'/></SwiperSlide>
+        <SwiperSlide><img className='banner__img' src= 'img/main_banner2.png'/></SwiperSlide>
         </Swiper>
         </div>
 

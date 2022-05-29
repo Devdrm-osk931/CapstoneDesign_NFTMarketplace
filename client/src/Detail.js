@@ -5,6 +5,7 @@ import { renderMatches, useParams } from 'react-router-dom'
 import getWeb3 from "./getWeb3";
 import Web3 from 'web3';
 import Mypage from './Mypage';
+import Modal from "./Modal";
 
 // axios.get(https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/40.json,[,config])
 // .then((Response)=>{console.log(Response.data)})
@@ -15,9 +16,53 @@ function Detail(props) {
 	const {id}=useParams();
 
 	const nft_sell = async() =>{
-		var test = await props.contract.methods.setSaleNftToken(id, "12").send({from: props.account, gas:300000});
+		var test = await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
 		var array = await props.contract.methods.getSaleNftTokens().call();
 		console.log(array);
+		window.location.replace("/mypage")
+	}
+
+	const [modalOpen, setModalOpen] = useState(false);
+	const [edit_modal_open, set_edit_Modal_open] = useState(false);
+
+	const openModal = () =>{
+		setModalOpen(true);
+	}
+
+	const closeModal = () =>{
+		setModalOpen(false);
+	}
+
+	const openModal2 = () =>{
+		set_edit_Modal_open(true);
+	}
+
+	const closeModal2 = () =>{
+		set_edit_Modal_open(false);
+	}
+
+	const [text, setText] = useState('');
+
+	const onChange = (event) => {
+		setText(event.target.value);
+	}
+
+	const nft_change_price=async()=>{
+
+		var array2 = await props.contract.methods.getSaleNftTokens().call();
+		console.log('first array',array2);
+
+		let test = await props.contract.methods.changePrice(id, text).send({from: props.account, gas:300000});
+		var array = await props.contract.methods.getSaleNftTokens().call();
+		console.log(array);
+	}
+
+	const nft_remove=async()=>{
+
+		let test1 = await props.contract.methods.removeToken(id).send({from: props.account, gas:300000});
+		var array2 = await props.contract.methods.getSaleNftTokens().call();
+		console.log(array2);
+		window.location.replace("/");
 	}
 
 	const clickBuy = async() => {
@@ -70,13 +115,41 @@ function Detail(props) {
 			<div id="price"><h4><br></br>Price if sold out text color is red<br/><br></br></h4> </div>
 
 			<Button onClick={clickBuy} variant="outline-warning" className='detail__button'> buy </Button>
+			<h4>O.O.O. project description</h4>
 			<p id="nft description">
-				<br></br>
-				<br></br>
-				<br></br>
 				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 			</p>
-			<Button variant ="outline-warning" onClick = {nft_sell}>sell</Button>
+			<br></br>
+				<br></br>
+				<br></br>
+			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
+			<Button variant ="outline-warning" onClick = {nft_remove}>remove</Button>
+
+			<React.Fragment>
+      <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>
+		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
+
+	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
+
+		<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+
+		<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
+      </Modal>
+    </React.Fragment>
+
+	<React.Fragment>
+      <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >change_price</Button>
+		<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
+
+	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
+
+		<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+
+		<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
+      </Modal>
+    </React.Fragment>
+
+
 		</div>
     </div>
   	);
