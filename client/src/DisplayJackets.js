@@ -46,7 +46,9 @@ function DisplayJackets(props) {
                 return(
                     <div>
                         <Button variant="outline-warning" href={"./detail/" + props.id}>Detail</Button>{' '}
-                        <Button variant="outline-warning">Edit</Button>
+                        <Button variant="outline-warning">Edit</Button>{' '}
+                        <Button variant="outline-warning">Cancel</Button>
+
                     </div>
                 )
             }
@@ -60,6 +62,14 @@ function DisplayJackets(props) {
             )
         }
         
+    }
+
+    function CheckPrice(props) {
+        if(props.price == 0) {
+            return (<h6>Not On Sale</h6>)
+        }else {
+            return (<h6>{props.price} ETH</h6>)
+        }
     }
 
     // 토큰 구매하기
@@ -114,23 +124,18 @@ function DisplayJackets(props) {
                 <Row xs ={1} md={4}>
                 {props.array.map(index => {
                 return (
-                <Col>
-                <div id= "display__col">
-                <a href={'./detail/' + index[0]}><OnSale index = {index[0]} src = {String(index[0]) + ".png"}/></a>
-                <br/>
-                <h5>#{index[0]} NFT</h5><br/>
-                <h6>{index[2]} ETH</h6>
-                <ManipulateButton contract = {props.contract} unit = {index} id = {index[0]} ownerAddress = {index[1]} price = {index[2]} myAddress = {props.account} type = {props.type}/>
-                <br/>
-                {/* <Button variant="outline-warning" href={'./detail/' + index}>Detail</Button>{' '}
-                <Button variant="outline-warning" onClick={(event) =>{
-					event.preventDefault()
-					ClickBuy()
-					}}>{props.type}</Button><br/><br/> */}
-                </div>
-                </Col>)
+                    <Col>
+                        <div id= "display__col">
+                            <a href={'./detail/' + index[0]}><OnSale index = {index[0]} src = {String(index[0]) + ".png"}/></a>
+                            <br/>
+                            <h5>#{index[0]} NFT</h5>
+                            {/* <h6>{index[2]} ETH</h6> */}
+                            <CheckPrice price = {index[2]}/>
+                            <ManipulateButton contract = {props.contract} unit = {index} id = {index[0]} ownerAddress = {index[1]} price = {index[2]} myAddress = {props.account} type = {props.type}/>
+                            <br/>
+                        </div>
+                    </Col>)
                 })}
-                {/* return <Col><OnSale index = {index} src = {index.toString() + ".png"}/><p></p></Col> */}
 
                 </Row>
             </Container>

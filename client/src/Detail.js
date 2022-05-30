@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { renderMatches, useParams } from 'react-router-dom'
 import getWeb3 from "./getWeb3";
@@ -22,8 +22,15 @@ function Detail(props) {
 		window.location.replace("/mypage")
 	}
 
+	const getPrice = async() => {
+		const price = await props.contract.methods.getNftTokenPrice(id).call();
+		setPrice(price);
+	}
+	useEffect(getPrice, []);
+
 	const [modalOpen, setModalOpen] = useState(false);
 	const [edit_modal_open, set_edit_Modal_open] = useState(false);
+	const [price, setPrice] = useState(0);
 
 	const openModal = () =>{
 		setModalOpen(true);
@@ -112,9 +119,8 @@ function Detail(props) {
 		<div id = "etc" style ={{float: "right", width: "45%", marginTop: "60px"}}>
 			<div></div>
 			<h1 id="title">Only One Ones # {id}</h1>
-			<div id="price"><h4><br></br>Price if sold out text color is red<br/><br></br></h4> </div>
+			<div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div>
 
-			<Button onClick={clickBuy} variant="outline-warning" className='detail__button'> buy </Button>
 			<h4>O.O.O. project description</h4>
 			<p id="nft description">
 				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
@@ -123,10 +129,11 @@ function Detail(props) {
 				<br></br>
 				<br></br>
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
-			<Button variant ="outline-warning" onClick = {nft_remove}>remove</Button>
+			<Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '}
+			<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '}
 
 			<React.Fragment>
-      <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>
+      <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '}
 		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
@@ -138,7 +145,7 @@ function Detail(props) {
     </React.Fragment>
 
 	<React.Fragment>
-      <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >change_price</Button>
+      <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>
 		<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>

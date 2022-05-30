@@ -119,9 +119,6 @@ class App extends Component {
           </Container>
       </Navbar>
 
-
-      {/* <h1>{this.state.storageValue} / 100</h1>
-      <h1>{this.state.contractAddress}</h1> */}
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main array = {this.state.sale_jackets} account = {this.state.accounts[0]} contract = {this.state.contract} contractAddress = {this.state.contractAddress} type = 'Main'/>}></Route>
