@@ -12,7 +12,7 @@ import AboutUs from "./AboutUs";
 import Main from './main';
 
 class App extends Component {
-  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], my_jackets : [], contract: null, gateway: null, contractAddress: null};
+  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
 
   componentDidMount = async () => {
     try {
@@ -35,11 +35,8 @@ class App extends Component {
       );
 
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
       this.setState({ web3, accounts, balance, contract: instance, gateway, contractAddress }, this.runExample);
     } catch (error) {
-      // Catch any errors for any of the above operations.
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
       );
@@ -49,43 +46,32 @@ class App extends Component {
 
   runExample = async () => {
     const { accounts, contract, contractAddress } = this.state;
-
-    // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    // this.setState({ storageValue: response });
-    // await contract.methods.set(5).send({ from: accounts[0] });
-    // const response = await contract.methods.totalSupply().call();
-
     const response = await contract.methods.totalSupply().call();
     const tempnftListArray = await contract.methods.getSaleNftTokens().call();
     console.log(tempnftListArray);
     const nftArray = [];  // 현재 판매중인 NFT 리스트 받아옴
 
     for(let i = 0; i < tempnftListArray.length;i++){
-      //_nftTokenId = tempnftListArray[i].nftTokenId;
-	    //_nftTokenURI = tempnftListArray[i].nftTokenURI;
-	    //_price = tempnftListArray[i].price;
       nftArray.push([Number(tempnftListArray[i][0]), tempnftListArray[i][1], Number(tempnftListArray[i][3])]);
     }
-    console.log(nftArray);
-    this.setState({storageValue: response, sale_jackets: nftArray})
 
+    const temp = await contract.methods.getNftTokens(accounts[0]).call()
+		const minted_jackets = []
+		for(let i = 0; i < temp.length; i ++ ) {
+			// id, owner_address, price
+			minted_jackets.push([Number(temp[i][0]), temp[i][1], Number(temp[i][3])]);
+		}
+    console.log(nftArray);
+    this.setState({storageValue: response, sale_jackets: nftArray, minted_jackets: minted_jackets})
+    console.log("minted:", this.state.minted_jackets);
   };
 
   render() {
     const giveapprove = async() =>{
-
       const ApprovalState = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
-
       if(ApprovalState === true){
         alert('이미 권한이 부여되어 있습니다.');
       }
-
       else{
         await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
       }
@@ -123,7 +109,7 @@ class App extends Component {
       <Routes>
         <Route path="/" element={<Main array = {this.state.sale_jackets} account = {this.state.accounts[0]} contract = {this.state.contract} contractAddress = {this.state.contractAddress} type = 'Main'/>}></Route>
         <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
-        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts[0]} array={this.state.sale_jackets} contractAddress = {this.state.contractAddress} type = 'MyPage'/>}></Route>
+        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts[0]} array={this.state.minted_jackets} contractAddress = {this.state.contractAddress} type = 'MyPage'/>}></Route>
         <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
         <Route path = "/contact" element = {<Contact/>}></Route>
         <Route path = "/aboutus" element = {<AboutUs/>}></Route>
