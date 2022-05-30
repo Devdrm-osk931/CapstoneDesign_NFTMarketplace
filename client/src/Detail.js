@@ -15,6 +15,22 @@ function Detail(props) {
 
 	const {id}=useParams();
 
+	function DetailButton () {
+		console.log("owner",typeof(owner), owner);
+		console.log("props.account",typeof(props.account),props.account);
+		if(owner === props.account)
+		{
+			return(
+				<Button variant="outline-warning" disabled>Owner</Button>
+			)
+		}
+		else
+		return(
+			<Button onClick={clickBuy} variant="outline-warning">Buy</Button>
+		)
+
+	}
+
 	const nft_sell = async() =>{
 		var test = await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
 		var array = await props.contract.methods.getSaleNftTokens().call();
@@ -22,15 +38,20 @@ function Detail(props) {
 		window.location.replace("/mypage")
 	}
 
-	const getPrice = async() => {
+	const getStatus = async() => {
+		const tempOwner = await props.contract.methods.ownerOf(id).call();
+		console.log("getowner",owner,typeof(owner));
 		const price = await props.contract.methods.getNftTokenPrice(id).call();
 		setPrice(price);
+		setOwner(tempOwner);
+		console.log(owner);
 	}
-	useEffect(getPrice, []);
+	useEffect(getStatus, [props.contract]);
 
 	const [modalOpen, setModalOpen] = useState(false);
 	const [edit_modal_open, set_edit_Modal_open] = useState(false);
 	const [price, setPrice] = useState(0);
+	const [owner, setOwner] = useState();
 
 	const openModal = () =>{
 		setModalOpen(true);
@@ -93,7 +114,6 @@ function Detail(props) {
 			if(!isApproved)
 				alert("approveState is false");
 			else
-				alert("buy");
 				try {
 					const response = await props.contract.methods.buyNftToken(id).send({ from: props.account, value: weiPrice });
 
@@ -129,11 +149,12 @@ function Detail(props) {
 				<br></br>
 				<br></br>
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
-			<Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '}
-			<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '}
+			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
+			<DetailButton></DetailButton>
+
 
 			<React.Fragment>
-      <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '}
+      	<Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '}
 		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
@@ -155,7 +176,7 @@ function Detail(props) {
 		<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
       </Modal>
     </React.Fragment>
-
+	<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '}
 
 		</div>
     </div>
