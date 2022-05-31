@@ -41,10 +41,10 @@ function DisplayJackets(props) {
                     <div>
                         <Button variant="outline-warning" href={"./detail/" + props.id}>Detail</Button>{' '}
 
-                        <Button variant="outline-warning" onClick = {(event) => {
+                        {/* <Button variant="outline-warning" onClick = {(event) => {
                             event.preventDefault()
                             Sell_NFT(props.id)
-                        }}>Sell</Button>{' '}
+                        }}>Sell</Button>{' '} */}
 
                         <Button variant="outline-warning" onClick = {(event) => {
                             event.preventDefault()
@@ -57,11 +57,11 @@ function DisplayJackets(props) {
                     <div>
                         <Button variant="outline-warning" href={"./detail/" + props.id}>Detail</Button>{' '}
 
-                        <Button variant="outline-warning" onClick = {(event) => {
+                        {/* <Button variant="outline-warning" onClick = {(event) => {
                         event.preventDefault()
                         Edit(props.id)
 
-                        }}>Edit</Button>{' '}
+                        }}>Edit</Button>{' '} */}
 
                         <Button variant="outline-warning" onClick = {(event) => {
                         event.preventDefault()
@@ -76,11 +76,11 @@ function DisplayJackets(props) {
                 <div>
                     <Button variant="outline-warning" href={"./detail/" + props.id}>Detail</Button>{' '}
 
-                    <Button variant="outline-warning" onClick = {(event) => {
+                    {/* <Button variant="outline-warning" onClick = {(event) => {
                         event.preventDefault()
                         Edit(props.id)
 
-                    }}>Edit</Button>{' '}
+                    }}>Edit</Button>{' '} */}
 
                     <Button variant="outline-warning" onClick = {(event) => {
                         event.preventDefault()

@@ -31,6 +31,61 @@ function Detail(props) {
 
 	}
 
+	function SellButton() {
+		console.log(props.ApprovalState);
+		if (price == 0 && props.ApprovalState) {
+			return (
+				<Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>
+			)
+		}else if(price == 0 & !props.ApprovalState) {
+			return (
+				<Button className = "Detail" variant ="outline-warning" onClick={() => {
+					alert("판매 권한이 없어요!")
+				}} >Sell</Button>
+			)
+		}
+		else {
+			return(
+				<Button className = "Detail" variant ="outline-warning" disabled>Sell</Button>
+			)
+		}
+	}
+
+	function EditButton() {
+		// 판매중이지 않은 경우
+		if (price == 0 || owner != props.account) {
+			return(
+					<Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
+			)
+		}else {
+			return(	
+					<Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>
+			)
+		}
+	}
+
+	function RemoveButton() {
+		if (price == 0 || owner != props.account) {
+			return(<Button variant = "outline-warning" disabled>Remove</Button>)
+		}else{
+			return(
+				<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>
+			)
+		}
+	}
+
+	function ShowPrice() {
+		if (price == 0) {
+			return(
+				<div id="price"><h4><br></br>Not On Sale 😖<br/><br></br></h4> </div>
+			)
+		}else {
+			return(
+				<div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div>
+			)
+		}
+	}
+
 	const nft_sell = async() =>{
 		var test = await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
 		var array = await props.contract.methods.getSaleNftTokens().call();
@@ -82,6 +137,8 @@ function Detail(props) {
 
 		let test = await props.contract.methods.changePrice(id, text).send({from: props.account, gas:300000});
 		var array = await props.contract.methods.getSaleNftTokens().call();
+		setPrice(text);
+		window.location.replace('/');
 		console.log(array);
 	}
 
@@ -139,7 +196,8 @@ function Detail(props) {
 		<div id = "etc" style ={{float: "right", width: "45%", marginTop: "60px"}}>
 			<div></div>
 			<h1 id="title">Only One Ones # {id}</h1>
-			<div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div>
+			{/* <div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div> */}
+			<ShowPrice/>
 
 			<h4>O.O.O. project description</h4>
 			<p id="nft description">
@@ -150,11 +208,12 @@ function Detail(props) {
 				<br></br>
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
 			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
-			<DetailButton></DetailButton>
+			<DetailButton/>{' '}
 
 
 			<React.Fragment>
-      	<Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '}
+      	{/* <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '} */}
+		  <SellButton/>{' '}
 		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
@@ -166,7 +225,8 @@ function Detail(props) {
     </React.Fragment>
 
 	<React.Fragment>
-      <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>
+      {/* <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>{' '} */}
+	  <EditButton/>{' '}
 		<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
@@ -176,7 +236,8 @@ function Detail(props) {
 		<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
       </Modal>
     </React.Fragment>
-	<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '}
+	{/* <Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '} */}
+	<RemoveButton/>
 
 		</div>
     </div>

@@ -12,7 +12,7 @@ import AboutUs from "./AboutUs";
 import Main from './main';
 
 class App extends Component {
-  state = { storageValue: 0, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
+  state = { storageValue: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
 
   componentDidMount = async () => {
     try {
@@ -46,10 +46,15 @@ class App extends Component {
 
   runExample = async () => {
     const { accounts, contract, contractAddress } = this.state;
+
+    const ApprovalState = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
     const response = await contract.methods.totalSupply().call();
     const tempnftListArray = await contract.methods.getSaleNftTokens().call();
     console.log(tempnftListArray);
     const nftArray = [];  // 현재 판매중인 NFT 리스트 받아옴
+
+    const recentNftTokenArray = await contract.methods.getRecentNftToken().call();
+    console.log(recentNftTokenArray);
 
     for(let i = 0; i < tempnftListArray.length;i++){
       nftArray.push([Number(tempnftListArray[i][0]), tempnftListArray[i][1], Number(tempnftListArray[i][3])]);
@@ -62,18 +67,32 @@ class App extends Component {
 			minted_jackets.push([Number(temp[i][0]), temp[i][1], Number(temp[i][3])]);
 		}
     console.log(nftArray);
-    this.setState({storageValue: response, sale_jackets: nftArray, minted_jackets: minted_jackets})
+    this.setState({ApprovalState: ApprovalState, storageValue: response, sale_jackets: nftArray, minted_jackets: minted_jackets})
     console.log("minted:", this.state.minted_jackets);
   };
 
   render() {
     const giveapprove = async() =>{
-      const ApprovalState = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
-      if(ApprovalState === true){
+      if(this.state.ApprovalState === true){
         alert('이미 권한이 부여되어 있습니다.');
       }
       else{
-        await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
+        const response = await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
+        if(response) {
+          this.setState({ApprovalState:response});
+          console.log(response)
+        }
+      }
+    }
+
+    const revokeapprove = async() => {
+      if (this.state.ApprovalState === false) {
+        alert("이미 권한이 철회 되었습니다.")
+      }else {
+        const response = await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, false).send({from: this.state.accounts[0]});
+        if (response) {
+          this.setState({ApprovalState: false});
+        }
       }
     }
 
@@ -89,14 +108,14 @@ class App extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">Explore<span>🔎</span></Nav.Link>
-              <Nav.Link href="/aboutus">AboutUs<span>📕</span></Nav.Link>
-              <Nav.Link href="/contact">ContactUs<span>📞</span></Nav.Link>
+              <Nav.Link href="/">Explore<span> 🔎 </span></Nav.Link>
+              <Nav.Link href="/aboutus">AboutUs<span> 📕 </span></Nav.Link>
+              <Nav.Link href="/contact">ContactUs<span> 📞 </span></Nav.Link>
               <Nav.Link href="/minting">Minting<span> 📲 </span></Nav.Link>
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item onClick = {giveapprove}>setApproved</NavDropdown.Item>
+                <NavDropdown.Item onClick = {giveapprove}>Grant</NavDropdown.Item>
+                <NavDropdown.Item onClick = {revokeapprove}>Revoke</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
