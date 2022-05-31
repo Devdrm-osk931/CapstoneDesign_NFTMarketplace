@@ -116,8 +116,6 @@ class App extends Component {
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item onClick = {giveapprove}>Grant</NavDropdown.Item>
                 <NavDropdown.Item onClick = {revokeapprove}>Revoke</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
