@@ -6,6 +6,7 @@ import getWeb3 from "./getWeb3";
 import Web3 from 'web3';
 import Mypage from './Mypage';
 import Modal from "./Modal";
+import axios from 'axios';
 
 // axios.get(https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/40.json,[,config])
 // .then((Response)=>{console.log(Response.data)})
@@ -58,7 +59,7 @@ function Detail(props) {
 					<Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
 			)
 		}else {
-			return(	
+			return(
 					<Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>
 			)
 		}
@@ -102,6 +103,38 @@ function Detail(props) {
 		console.log(owner);
 	}
 	useEffect(getStatus, [props.contract]);
+
+	const getinformation =async()=>{
+		await axios.get('https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/'+id+'.json')
+		.then((Response)=>{
+			// console.log(Response.data);
+			// console.log(typeof(Response.data));
+			console.log(Response.data.attributes)
+			console.log(typeof(Response.data.attributes))
+			console.log(typeof(Object.entries(Response.data.attributes)))
+			setInformation(Response.data.attributes);
+			// console.log("information",information)
+
+			Response.data.attributes.map((info)=>{
+				console.log(info.trait_type,":", info.value)})
+		})
+		.catch((Error)=>{console.log(Error)})
+	}
+	const [information, setInformation]=useState();
+
+	function PrintAttribute() {
+
+		console.log("information",information);
+		console.log("information type",typeof(information));
+		// console.log(JSON.stringify(information['1']));
+		return(
+			<div>
+			{}
+			</div>
+		);
+	}
+
+	useEffect(getinformation,[]);
 
 	const [modalOpen, setModalOpen] = useState(false);
 	const [edit_modal_open, set_edit_Modal_open] = useState(false);
@@ -206,6 +239,7 @@ function Detail(props) {
 			<br></br>
 				<br></br>
 				<br></br>
+				<PrintAttribute></PrintAttribute>
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
 			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
 			<DetailButton/>{' '}
