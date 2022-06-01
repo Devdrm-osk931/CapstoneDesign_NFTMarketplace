@@ -12,15 +12,34 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
     using Strings for uint256;
 
     string public baseURI;
+    uint256[] public numArray;
 
-    constructor() ERC721("Jacket", "JACKET") {}
+    constructor() ERC721("Jacket", "JACKET") {
+        for (uint256 i = 1; i <= 100; i++) {
+            numArray.push(i);
+        }
+    }
 
     function mint() public returns (uint256) {
-        _tokenIds.increment();
-        uint256 newItemId = _tokenIds.current();
-        _safeMint(msg.sender, newItemId);
-        return newItemId;
+        require(numArray.length > 0, "Image is sold out.");
+        uint256 random = uint256(
+            keccak256(
+                abi.encodePacked(block.difficulty, block.timestamp, numArray)
+            )
+        ) % numArray.length;
+        uint256 id = numArray[random];
+        _safeMint(msg.sender, numArray[random]);
+        numArray[random] = numArray[numArray.length - 1];
+        numArray.pop();
+        return id;
     }
+
+    // function mint() public returns (uint256) {
+    //     _tokenIds.increment();
+    //     uint256 newItemId = _tokenIds.current();
+    //     _safeMint(msg.sender, newItemId);
+    //     return newItemId;
+    // }
 
     // function setBaseURI(string memory baseURI_) external onlyOwner {
     //     baseURI = baseURI_;
@@ -83,7 +102,12 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
             uint256 nftTokenId = tokenOfOwnerByIndex(_nftTokenOwner, i);
             string memory nftTokenURI = tokenURI(nftTokenId);
             uint256 tokenPrice = getNftTokenPrice(nftTokenId);
-            nftTokenData[i] = NftTokenData(nftTokenId, _nftTokenOwner, nftTokenURI, tokenPrice);
+            nftTokenData[i] = NftTokenData(
+                nftTokenId,
+                _nftTokenOwner,
+                nftTokenURI,
+                tokenPrice
+            );
         }
 
         return nftTokenData;
@@ -179,6 +203,7 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         );
         _burn(_tokenId);
         removeToken(_tokenId);
+        numArray.push(_tokenId);
     }
 
     function removeToken(uint256 _tokenId) public {
