@@ -173,7 +173,7 @@ function Mypage(props) {
 						getMyJackets();
 	 					}}>All</Button>
 						{' '}
-						<Button variant="outline-warning" onClick={getMySaleJackets}>On Sale</Button>
+						<Button variant="outline-warning" onClick={getMySaleJackets}>On Sale</Button>{' '}
 						<Button variant="outline-warning" onClick={jacketSort}>test</Button>
 				</div>
 				<div>

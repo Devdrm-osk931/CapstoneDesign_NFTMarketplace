@@ -24,7 +24,8 @@ function Detail(props) {
 		if(owner === props.account)
 		{
 			return(
-				<Button variant="outline-warning" disabled>Owner</Button>
+				// <Button variant="outline-warning" disabled>Owner</Button>
+				<></>
 			)
 		}
 		else
@@ -49,7 +50,8 @@ function Detail(props) {
 		}
 		else {
 			return(
-				<Button className = "Detail" variant ="outline-warning" disabled>Sell</Button>
+				// <Button className = "Detail" variant ="outline-warning" disabled>Sell</Button>
+				<></>
 			)
 		}
 	}
@@ -58,7 +60,8 @@ function Detail(props) {
 		// 판매중이지 않은 경우
 		if (price == 0 || owner != props.account) {
 			return(
-					<Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
+					// <Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
+					<></>
 			)
 		}else {
 			return(
@@ -69,7 +72,10 @@ function Detail(props) {
 
 	function RemoveButton() {
 		if (price == 0 || owner != props.account) {
-			return(<Button variant = "outline-warning" disabled>Remove</Button>)
+			return(
+			// <Button variant = "outline-warning" disabled>Remove</Button>
+			<></>
+			)
 		}else{
 			return(
 				<Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>
@@ -299,19 +305,19 @@ function Detail(props) {
 		<div id = "etc" style ={{width: '45%', marginTop: "60px", float:'right'}}>
 			<div></div>
 			<h1 id="title">Only One Ones # {id}</h1>
-			{/* <div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div> */}
+
 			<ShowPrice/>
 
-			<h4>O.O.O. project description</h4>
+			<h3>O.O.O. project description</h3>
 			<p id="nft description">
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+				<p><i>NFT collection of College Jumpers</i></p>
+				<p><i>Made By SOKSAK</i></p>
+				<p><i>All Rights Reserved</i></p>
 			</p>
-				<PrintJacket></PrintJacket>
-				<PrintLogo></PrintLogo>
-				<PrintCollege></PrintCollege>
-				<PrintStudent_ID></PrintStudent_ID>
-			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
-			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
+				<PrintJacket/>
+				<PrintLogo/>
+				<PrintCollege/>
+				<PrintStudent_ID/>
 			<DetailButton/>{' '}
 		
 
