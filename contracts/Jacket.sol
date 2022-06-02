@@ -10,6 +10,8 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     using Strings for uint256;
+    uint256 mintedId;
+
 
     string public baseURI;
     uint256[] public numArray;
@@ -20,7 +22,11 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         }
     }
 
-    function mint() public returns (uint256) {
+    function getmintedId() public view returns (uint256) {
+        return mintedId;
+    }
+
+    function mint() public {
         require(numArray.length > 0, "Image is sold out.");
         uint256 random = uint256(
             keccak256(
@@ -31,7 +37,7 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         _safeMint(msg.sender, numArray[random]);
         numArray[random] = numArray[numArray.length - 1];
         numArray.pop();
-        return id;
+        mintedId = id;
     }
 
     // function mint() public returns (uint256) {
