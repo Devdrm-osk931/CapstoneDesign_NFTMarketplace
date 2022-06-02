@@ -19,7 +19,6 @@ function Detail(props) {
 	function DetailButton () {
 		console.log("owner",typeof(owner), owner);
 		console.log("props.account",typeof(props.account),props.account);
-		console.log("image src",imageSrc);
 		if(owner === props.account)
 		{
 			return(
@@ -42,7 +41,7 @@ function Detail(props) {
 		}else if(price == 0 & !props.ApprovalState) {
 			return (
 				<Button className = "Detail" variant ="outline-warning" onClick={() => {
-					alert("판매 권한이 없어요!")
+					alert("�뙋留� 沅뚰븳�씠 �뾾�뼱�슂!")
 				}} >Sell</Button>
 			)
 		}
@@ -54,7 +53,7 @@ function Detail(props) {
 	}
 
 	function EditButton() {
-		// 판매중이지 않은 경우
+		// �뙋留ㅼ쨷�씠吏� �븡��� 寃쎌슦
 		if (price == 0 || owner != props.account) {
 			return(
 					<Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
@@ -79,11 +78,11 @@ function Detail(props) {
 	function ShowPrice() {
 		if (price == 0) {
 			return(
-				<div id="price"><h4><br></br>Not On Sale 😖<br/><br></br></h4> </div>
+				<div id="price"><h4><br></br>Not On Sale �윑�<br/><br></br></h4> </div>
 			)
 		}else {
 			return(
-				<div id="price"><h4><br></br>price : {price} ETH<br/><br></br></h4> </div>
+				<div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div>
 			)
 		}
 	}
@@ -110,9 +109,9 @@ function Detail(props) {
 		.then((Response)=>{
 			// console.log(Response.data);
 			// console.log(typeof(Response.data));
-			// console.log(Response.data.attributes)
-			// console.log(typeof(Response.data.attributes))
-			setImageSrc(Response.data.image);
+			console.log(Response.data.attributes)
+			console.log(typeof(Response.data.attributes))
+			console.log(typeof(Object.entries(Response.data.attributes)))
 			setInformation(Response.data.attributes);
 			// console.log("information",information)
 
@@ -122,59 +121,15 @@ function Detail(props) {
 		.catch((Error)=>{console.log(Error)})
 	}
 	const [information, setInformation]=useState();
-	const [imageSrc, setImageSrc] = useState();
 
-	function PrintJacket() {
+	function PrintAttribute() {
+
+		console.log("information",information);
+		console.log("information type",typeof(information));
+		// console.log(JSON.stringify(information['1']));
 		return(
 			<div>
-			{
-				(information && Object.keys(information).length > 1) &&
-				<div>
-					<hr/>
-					<h2>Properties</h2>
-					<h4>{information[1].trait_type} : {information[1].value} </h4>
-					<p>25% have this trait</p>
-				</div>
-			}
-			</div>
-		);
-	}
-	function PrintLogo() {
-		return(
-			<div>
-			{
-				(information && Object.keys(information).length > 2) &&
-				<div>
-					<h4>{information[2].trait_type} : {information[2].value} </h4>
-					<p>25% have this trait</p>
-				</div>
-			}
-			</div>
-		);
-	}
-	function PrintCollege() {
-		return(
-			<div>
-			{
-				(information && Object.keys(information).length > 3) &&
-				<div>
-					<h4>{information[3].trait_type} : {information[3].value} </h4>
-					<p>25% have this trait</p>
-				</div>
-			}
-			</div>
-		);
-	}
-	function PrintStudent_ID() {
-		return(
-			<div>
-			{
-				(information && Object.keys(information).length > 4) &&
-				<div>
-					<h4>{information[4].trait_type} : {information[4].value} </h4>
-					<p>25% have this trait</p>
-				</div>
-			}
+			{}
 			</div>
 		);
 	}
@@ -268,7 +223,7 @@ function Detail(props) {
 	return (
     <div className="Detail">
 		<div id ="section__image" style ={{float: "left", width: "50%", margin: "20px"}}>
-			  <img id = "detail__image" src = {imageSrc}/>
+			  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
 		  </div>
 
 		<div id = "etc" style ={{float: "right", width: "45%", marginTop: "60px"}}>
@@ -284,10 +239,7 @@ function Detail(props) {
 			<br></br>
 				<br></br>
 				<br></br>
-				<PrintJacket></PrintJacket>
-				<PrintLogo></PrintLogo>
-				<PrintCollege></PrintCollege>
-				<PrintStudent_ID></PrintStudent_ID>
+				<PrintAttribute></PrintAttribute>
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
 			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
 			<DetailButton/>{' '}
@@ -296,26 +248,26 @@ function Detail(props) {
 			<React.Fragment>
       	{/* <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '} */}
 		  <SellButton/>{' '}
-		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
+		<Modal open={modalOpen} close={closeModal} header="�뙋留� �젙蹂� �벑濡�">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
 
-		<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+		<input onChange={onChange} value = {text} placeholder = "媛�寃� �엯�젰"/>
 
-		<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
+		<Button variant ="outline-warning" onClick = {nft_sell} >�벑濡�</Button>
       </Modal>
     </React.Fragment>
 
 	<React.Fragment>
       {/* <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>{' '} */}
 	  <EditButton/>{' '}
-		<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
+		<Modal open={edit_modal_open} close={closeModal2} header="�뙋留� 媛�寃� 蹂�寃�">
 
 	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
 
-		<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+		<input onChange={onChange} value = {text} placeholder = "媛�寃� �엯�젰"/>
 
-		<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
+		<Button variant ="outline-warning" onClick = {nft_change_price} >媛�寃� 蹂�寃�</Button>
       </Modal>
     </React.Fragment>
 	{/* <Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '} */}
