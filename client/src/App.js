@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jacket from "./contracts/Jacket.json";
 import getWeb3 from "./getWeb3";
-import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form, Row, Col} from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DisplayJackets from "./DisplayJackets";
 import Detail from "./Detail";
@@ -10,6 +10,7 @@ import Minting from './Minting';
 import Contact from "./Contact";
 import AboutUs from "./AboutUs";
 import Main from './main';
+import Footer from './Footer';
 
 class App extends Component {
   state = { storageValue: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
@@ -99,6 +100,9 @@ class App extends Component {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
+
+    
+
     return (
       <div className="App">
 
@@ -133,7 +137,6 @@ class App extends Component {
       </Routes>
       </BrowserRouter>
 
-
       {/* <div className="component-spacing">
       <DisplayJackets array = {this.state.sale_jackets}/>
       </div>
@@ -141,6 +144,42 @@ class App extends Component {
       <footer>
         <h2>This is footer</h2>
       </footer> */}
+
+      {/* <Container>
+      <h1>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h1>
+      </Container>
+      <footer  style={{ height: '150px' , background: 'gray', width:'100%' }}>
+      <Navbar expand="lg">
+      <Container>
+        <Navbar.Brand><img src={ require('./image/footerlogo.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        </Navbar.Brand>
+        <Row>
+        <Col>
+           <div>
+
+           </div>
+        </Col>
+        <Col>
+           <div>
+           <div style={{width:'60%', marginLeft:'10%'}}>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</div>
+
+          </div>
+        </Col>
+        <Col>
+           <div>
+
+            <div><h5>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤCapstone Design - SOKSAK's  ㅤNFT MarketPlace Service    </h5></div>
+
+          </div>
+        </Col>
+      </Row>
+        </Container>
+    </Navbar>
+    
+  
+  </footer> */}
+
+    <Footer></Footer>
       </div>
     );
   }

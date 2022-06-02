@@ -117,6 +117,21 @@ function Mypage(props) {
 		console.log("Sale", my_array);
 
 	}
+
+	const jacketSort =async() => {
+		const myJackets = props.array;
+		const sortedJackets = [];
+		const test = [...myJackets].sort(function(a, b){
+			return a[2] -b[2];
+		});
+		
+		for(let i = 0 ; i < myJackets.length; i++){
+			sortedJackets.push([Number(test[i][0]), test[i][1], Number(test[i][2])]);
+		}
+		set_array(sortedJackets);
+		setmode('MyPageAll');
+	}
+
 	useEffect(getMyJackets,[props.array]);
 
 
@@ -135,8 +150,7 @@ function Mypage(props) {
 
 			<Container fluid>
 				<Col>
-					<h1>   </h1>
-					<h1>   </h1>
+					<h7>   </h7>
 				</Col>
 			</Container>
 
@@ -160,6 +174,7 @@ function Mypage(props) {
 	 					}}>All</Button>
 						{' '}
 						<Button variant="outline-warning" onClick={getMySaleJackets}>On Sale</Button>
+						<Button variant="outline-warning" onClick={jacketSort}>test</Button>
 				</div>
 				<div>
 					<DisplayJackets array = {my_array} account = {props.account} contract={props.contract} contractAddress = {props.contractAddress} type = {mode} />

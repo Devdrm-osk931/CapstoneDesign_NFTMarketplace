@@ -33,6 +33,7 @@
 
 .App {
   text-align: center;
+  white-space: pre-wrap;
 }
 
 .App-logo {
@@ -69,10 +70,9 @@
 }
 
 .navbar-custom {
-  background-color: #f7f7f7;
-  max-width: 1150px;
-  margin: auto;
-}
+	background-color: #f7f7f7;
+	margin: auto;
+  }
 
 .component-spacing {
   margin-top: 1.2cm;
@@ -80,10 +80,12 @@
 
 /* detail */
 
+
+
 #detail__image{
 	max-width: 100%;
 	height: auto;
-	display: block;
+	
 	border: 1px solid black;
 }
 
@@ -162,19 +164,45 @@ font-Size: 1.5em;
 /* swiper */
 .banner{
 	margin-top: 30px;
-	border: solid 1px var(--color-black);
-	max-width: 1080px;
+	border: solid 1px var(--color-dark-white);
+	max-width: 100%;
 }
 
 /* contact us */
-@media only screen and (max-width: 1199px) {
-    contact.navbar{
-      background: #403f83;
-    }
-    contact.navbar .menu-line, .navbar .menu-line1, .navbar .menu-line2{
-      background: #fff;
-    }
-    contact.item-dropdown .dropdown a{
-      color: #fff !important;
-    }
+.imageimage {
+background-size: relative;
+max-height: max-content;
+    color: whitesmoke;
   }
+  #input1 {
+	background-color: #feb546;
+	border: 3px solid whitesmoke;
+	color: #fff;
+	border-radius: 5px;
+}
+
+form {
+	margin-top: auto; 
+	padding: 50px;
+	background: #F5F5F5;  
+  }
+
+input {
+	border:1px solid #eee;
+	font: normal 1px Verdana, sans-serif;
+	color:#777;
+	padding-top: 15px;
+	margin-top: 15px;
+  }
+
+  address {
+	font-size: 15px;
+	color: black;
+background:#eee;
+margin-top: auto;
+text-align: left;
+  }
+
+.hide{
+	  visibility :hidden;
+	  }

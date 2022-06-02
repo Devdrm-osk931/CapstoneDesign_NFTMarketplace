@@ -4,79 +4,112 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function AboutUs(){
     return(
-        <div className="App" style={{width:'100%', height:'300px'}}>
-            <p style={{fontWeight: '500', fontSize: '3em'}}>Only One's Own</p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque <br></br>laudantium,totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi <br></br>architecto beatae vitae dicta sunt explicabo.
+        <div>
+        <Container style={{padding: '0px'}}>
+        <div>
+        <img src={ require('./image/aboutus.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        </div>
+        </Container>
 
+        <Container fluid>
+        <Col>
+            <h7>   </h7>
+        </Col>
+        </Container>
+
+        <Container style={{padding: '0px'}}>
+        <div>
+        <img src={ require('./image/aboutusins.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        </div>
+        </Container>
+
+        <Container fluid>
+        <Col>
+            <h1>   </h1>
+            <h1>   </h1>
+        </Col>
+        </Container>
         
         
-            <Container fluid style={{marginTop: '6%', width:'80%', marginLeft:'10%'}}>
-                <Row xs={1} md={3}>
-                    
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">고승렬</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                        <br></br><br></br><br></br>
-                    </Col>
-                    
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">김민재</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">전나연</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">정동환</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">오석교</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className = "profile-align-center">
-                            <img src = "/profile2.png"></img>
-                            <p className = "AboutUs-font">이지환</p>
-                            <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                                <div style={{width:'60%', marginLeft:'20%'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
-                            </div>
-                        </div>
-                    </Col>
-                    
-                </Row>
-            </Container>
+        <Container style={{padding: '0px', border : '1px solid #d9d9d9'}}>
+        <Container>
         
+        <Row>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/profile2.png"></img>
+                 <p className = "AboutUs-font">고승렬</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1998.01.26 <br></br>2017112172 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/Kim.png"></img>
+                 <p className = "AboutUs-font">김민재</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1997.03.12 <br></br>2019113592 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/profile2.png"></img>
+                 <p className = "AboutUs-font">오석교</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1996.07.28 <br></br>2017112204 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+        </Row>
+
+        <Container fluid>
+        <Col>
+            <h1>   </h1>
+            <h1>   </h1>
+        </Col>
+        </Container>
+
+        <Row>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/Lee.jpg"></img>
+                 <p className = "AboutUs-font">이지환</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>2000.09.13 <br></br>2019112120 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/profile2.png"></img>
+                 <p className = "AboutUs-font">전나연</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1999.10.11<br></br> 2018111688 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/profile2.png"></img>
+                 <p className = "AboutUs-font">정동환</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1998.11.18<br></br>2017112189 <br></br>정보통신공학과</div>
+                 </div>
+                 </div>
+          </Col>
+        </Row>
+        </Container>
+        </Container>
+
+    
+    <Container fluid>
+    <Col>
+        <h1>   </h1>
+        <h1>   </h1>
+    </Col>
+    </Container>
     </div>
     ); 
 }

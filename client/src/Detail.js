@@ -7,6 +7,7 @@ import Web3 from 'web3';
 import Mypage from './Mypage';
 import Modal from "./Modal";
 import axios from 'axios';
+import { ReactComponent as ETH } from './image/ethereum-brands.svg';
 
 // axios.get(https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/40.json,[,config])
 // .then((Response)=>{console.log(Response.data)})
@@ -79,11 +80,11 @@ function Detail(props) {
 	function ShowPrice() {
 		if (price == 0) {
 			return(
-				<div id="price"><h4><br></br>Not On Sale 😖<br/><br></br></h4> </div>
+				<div id="price"><h4><br></br>Not On Sale 😖</h4> </div>
 			)
 		}else {
 			return(
-				<div id="price"><h4><br></br>price : {price} ETH<br/><br></br></h4> </div>
+				<div id="price"><h4><br></br>price : {price} <ETH style ={{height:'18px'}}/></h4> </div>
 			)
 		}
 	}
@@ -125,6 +126,11 @@ function Detail(props) {
 	const [imageSrc, setImageSrc] = useState();
 
 	function PrintJacket() {
+
+		let percent;
+		if(information)
+			percent = '10%';
+
 		return(
 			<div>
 			{
@@ -133,46 +139,63 @@ function Detail(props) {
 					<hr/>
 					<h2>Properties</h2>
 					<h4>{information[1].trait_type} : {information[1].value} </h4>
-					<p>25% have this trait</p>
+					<p> {percent} have this trait</p>
 				</div>
 			}
 			</div>
 		);
 	}
 	function PrintLogo() {
+
+		let percent;
+		if(information){
+			percent =  information[2].value == ('Lotus_Black' || 'Lotus_White') ? '5%' :  '22.5%';
+		}
+
 		return(
 			<div>
 			{
 				(information && Object.keys(information).length > 2) &&
 				<div>
 					<h4>{information[2].trait_type} : {information[2].value} </h4>
-					<p>25% have this trait</p>
+					<p>{percent}  have this trait</p>
 				</div>
 			}
 			</div>
 		);
 	}
 	function PrintCollege() {
+
+		let percent;
+		if(information)
+			percent = '25%';
+
 		return(
 			<div>
 			{
 				(information && Object.keys(information).length > 3) &&
 				<div>
 					<h4>{information[3].trait_type} : {information[3].value} </h4>
-					<p>25% have this trait</p>
+					<p>{percent} have this trait</p>
 				</div>
 			}
 			</div>
 		);
 	}
 	function PrintStudent_ID() {
+
+		let percent;
+		if(information){
+			percent = information[4].value == ('17' || '19') ? '33%' :'34%';
+		}
+
 		return(
 			<div>
 			{
 				(information && Object.keys(information).length > 4) &&
 				<div>
 					<h4>{information[4].trait_type} : {information[4].value} </h4>
-					<p>25% have this trait</p>
+					<p>{percent} have this trait</p>
 				</div>
 			}
 			</div>
@@ -266,12 +289,14 @@ function Detail(props) {
 	  };
 
 	return (
-    <div className="Detail">
-		<div id ="section__image" style ={{float: "left", width: "50%", margin: "20px"}}>
+    <div className="Detail" style ={{marginBottom: '860px'}}>
+	<Container>
+		<div style = {{backgroundColor:'black'}}>
+		<div id ="section__image" style ={{float:'left',display:'flex', width: "45%", marginTop: '60px'}}>
 			  <img id = "detail__image" src = {imageSrc}/>
 		  </div>
-
-		<div id = "etc" style ={{float: "right", width: "45%", marginTop: "60px"}}>
+		 
+		<div id = "etc" style ={{width: '45%', marginTop: "60px", float:'right'}}>
 			<div></div>
 			<h1 id="title">Only One Ones # {id}</h1>
 			{/* <div id="price"><h4><br></br>{price} ETH<br/><br></br></h4> </div> */}
@@ -281,9 +306,6 @@ function Detail(props) {
 			<p id="nft description">
 				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 			</p>
-			<br></br>
-				<br></br>
-				<br></br>
 				<PrintJacket></PrintJacket>
 				<PrintLogo></PrintLogo>
 				<PrintCollege></PrintCollege>
@@ -291,22 +313,22 @@ function Detail(props) {
 			{/* <Button variant ="outline-warning" onClick = {nft_change_price}>change_price</Button> */}
 			{/* <Button onClick={clickBuy} variant="outline-warning" className='detail__button'> Buy </Button>{' '} */}
 			<DetailButton/>{' '}
-
+		
 
 			<React.Fragment>
       	{/* <Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>{' '} */}
 		  <SellButton/>{' '}
 		<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
 
-	  <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
+	    <img id = "detail__image" src = {props.src + "/" + id.toString() +".png"}/>
 
 		<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
 
 		<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
-      </Modal>
-    </React.Fragment>
+        </Modal>
+        </React.Fragment>
 
-	<React.Fragment>
+	    <React.Fragment>
       {/* <Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>{' '} */}
 	  <EditButton/>{' '}
 		<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
@@ -317,11 +339,12 @@ function Detail(props) {
 
 		<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
       </Modal>
-    </React.Fragment>
-	{/* <Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '} */}
-	<RemoveButton/>
-
-		</div>
+      </React.Fragment>
+	   {/* <Button variant ="outline-warning" onClick = {nft_remove}>Remove</Button>{' '} */}
+	  <RemoveButton/>
+	  </div>
+	  </div>
+	</Container>
     </div>
   	);
 }

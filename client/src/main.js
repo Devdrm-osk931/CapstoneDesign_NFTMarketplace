@@ -1,13 +1,16 @@
 import './App.css';
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/swiper.scss';
 import DisplayJackets from './DisplayJackets';
+import {Button, Dropdown} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, FormControl, Form} from "react-bootstrap";
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
 function MainSilde (){
   return(
+    <Container>
   <div>
             <Swiper
         className="banner"
@@ -18,23 +21,67 @@ function MainSilde (){
         pagination={{ clickable: true }}
         autoplay={{ delay: 1500 }}
       >
-        <SwiperSlide><img className='banner__img' src='img/1.png'/></SwiperSlide>
-        <SwiperSlide><img className='banner__img' src= 'img/65.png'/></SwiperSlide>
-        <SwiperSlide><img className='banner__img' src='img/99.png'/></SwiperSlide>
-        <SwiperSlide><img className='banner__img' src= 'img/main_banner2.png'/></SwiperSlide>
+      <SwiperSlide><img className='banner__img' src='img/main_banner.png'/></SwiperSlide>
+      <SwiperSlide><img className='banner__img' src= 'img/banner1.png'/></SwiperSlide>
+      <SwiperSlide><img className='banner__img' src='img/banner2.png'/></SwiperSlide>
+      <SwiperSlide><img className='banner__img' src='img/banner3.png'/></SwiperSlide>
+      <SwiperSlide><img className='banner__img' src= 'img/banner4.png'/></SwiperSlide>
         </Swiper>
         </div>
+        </Container>
 
   )
 }
 
-function Main (props){
-    return(
-        <div>
-            <MainSilde/>
-            <DisplayJackets array = {props.array} account = {props.account} contract = {props.contract} contractAddress = {props.contractAddress} type ={props.type}/>
-        </div>
-    )
-}
+function Main (props){  
 
+  const[currentArray, setCurrentArray] = useState(props.array);
+  
+
+  function getJackets(){
+    const jackets = props.array;
+    setCurrentArray(jackets);
+    console.log("jackets: ", jackets);
+  }
+
+  function sortById(){
+    const jackets = [...props.array].sort(function(a, b){
+      return a[0]-b[0];
+    })
+    setCurrentArray(jackets);
+    console.log("IDjackets: ", jackets);
+  }
+
+  function sortByPrice(){
+    const jackets = [...props.array].sort(function(a, b){
+      return a[2]-b[2];
+    })
+    setCurrentArray(jackets);
+    console.log("pricejackets: ", jackets);
+  }
+  useEffect(getJackets, [props.array]);
+  return(
+    <div>
+
+
+      <MainSilde/>
+      <div style = {{ width:'20%', float: 'left'}}>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          정렬 옵션
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick = {getJackets}>등록순</Dropdown.Item>
+          <Dropdown.Item onClick = {sortByPrice}>가격순</Dropdown.Item>
+          <Dropdown.Item onClick = {sortById}>ID순</Dropdown.Item>
+        </Dropdown.Menu>
+        </Dropdown>
+      </div>
+        
+        
+        <DisplayJackets array = {currentArray} account = {props.account} contract = {props.contract} contractAddress = {props.contractAddress} type ={props.type}/>
+    </div>
+  )
+}
 export default Main;

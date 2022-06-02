@@ -3,7 +3,7 @@ import "./App.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import OnSale from "./OnSale";
 import Web3 from 'web3';
-import Modal from "./Modal";
+import { ReactComponent as ETH } from './image/ethereum-brands.svg';
 
 
 function DisplayJackets(props) {
@@ -96,7 +96,7 @@ function DisplayJackets(props) {
         if(props.price == 0) {
             return (<h6>Not On Sale</h6>)
         }else {
-            return (<h6>{props.price} ETH</h6>)
+            return (<h6>{props.price}<ETH style ={{height:'18px'}}/></h6>)
         }
     }
 
