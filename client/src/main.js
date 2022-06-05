@@ -85,7 +85,7 @@ function Main (props){
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onClick = {getJackets}>등록순</Dropdown.Item>
+          <Dropdown.Item onClick = {getJackets}>판매 등록순</Dropdown.Item>
           <Dropdown.Item onClick = {sortByPrice}>가격순</Dropdown.Item>
           <Dropdown.Item onClick = {sortById}>ID순</Dropdown.Item>
         </Dropdown.Menu>

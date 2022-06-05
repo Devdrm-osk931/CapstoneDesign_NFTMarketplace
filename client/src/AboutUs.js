@@ -96,7 +96,7 @@ function AboutUs(){
           
           <Col>
              <div className = "profile-align-center">
-                 <img src = "/profile2.png"></img>
+                 <img src = "/Jeon.jpeg" style={{width:'150px', height:'200px'}}></img>
                  <p className = "AboutUs-font">전나연</p>
                  <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
                  <div style={{width:'60%', marginLeft:'20%'}}>1999.10.11<br></br> 2018111688 <br></br>정보통신공학과<br/><b>NFT Designer</b></div>

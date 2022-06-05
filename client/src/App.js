@@ -53,8 +53,6 @@ class App extends Component {
     console.log(tempnftListArray);
     const nftArray = [];  // 현재 판매중인 NFT 리스트 받아옴
 
-    const recentNftTokenArray = await contract.methods.getRecentNftToken().call();
-    console.log(recentNftTokenArray);
 
     for(let i = 0; i < tempnftListArray.length;i++){
       nftArray.push([Number(tempnftListArray[i][0]), tempnftListArray[i][1], Number(tempnftListArray[i][3])]);
@@ -96,6 +94,13 @@ class App extends Component {
       }
     }
 
+    const check_approve = async() => {
+      const auth = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
+      console.log("현재주소:" + this.state.accounts[0])
+      console.log("현재 권한: " + auth);
+      console.log("state 권한: " + this.state.ApprovalState);
+    }
+
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
@@ -107,7 +112,7 @@ class App extends Component {
 
         <Navbar className="navbar-custom sticky-top" expand="lg">
         <Container>
-          <Navbar.Brand href="/">OnlyOneOnes</Navbar.Brand>
+          <Navbar.Brand href="/"><img src={ require('./image/Logo.png') } style = {{width:'45px', height:'45px'}}></img></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -119,6 +124,7 @@ class App extends Component {
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
                 <NavDropdown.Item onClick = {giveapprove}>Grant</NavDropdown.Item>
                 <NavDropdown.Item onClick = {revokeapprove}>Revoke</NavDropdown.Item>
+                <NavDropdown.Item onClick={check_approve}> Check </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

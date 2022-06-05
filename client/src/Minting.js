@@ -26,6 +26,11 @@ const Minting = (props) => {
         })
     }
 
+	const mint_10 = async() => {
+		for(var i = 0; i < 10; i ++) {
+			mint()
+		}
+	}
 
 	return(
 		<div>
@@ -44,6 +49,11 @@ const Minting = (props) => {
 					event.preventDefault()
 					mint()
 				}}>Mint!</Button>
+
+				<Button onClick={(event) => {
+					event.preventDefault()
+					mint_10()
+				}}>Test</Button>
 
 			
 			</div>

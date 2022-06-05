@@ -218,11 +218,11 @@ function Mypage(props) {
 
 			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '20px' , background: '#f7f7f7'}}>
 				<div class = "profile-user-img">
-					<img src={ require('./image/profile.png') } alt="profile-user-img" class="profile-user-img-img"/>
+					<img src="/profile2.png" alt="profile-user-img" class="profile-user-img-img"/>
 				</div>
 				<br/>
-				<h1>User1</h1>
-				<h5>Connected account : {props.account} </h5>
+				<h1>Account</h1>
+				<h5>{props.account} </h5>
 			</Container>
 
 			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '0px'}}>
@@ -244,7 +244,7 @@ function Mypage(props) {
 												</Dropdown.Toggle>
 
 												<Dropdown.Menu>
-													<Dropdown.Item onClick= {getMyJackets}>등록순</Dropdown.Item>
+													<Dropdown.Item onClick= {getMyJackets}>민팅순</Dropdown.Item>
 													<Dropdown.Item onClick= {allById}>ID순</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
@@ -257,8 +257,8 @@ function Mypage(props) {
 												</Dropdown.Toggle>
 
 												<Dropdown.Menu>
-													<Dropdown.Item onClick= {onSaleByPrice}>가격순</Dropdown.Item>
 													<Dropdown.Item onClick= {onSaleById}>ID순</Dropdown.Item>
+													<Dropdown.Item onClick= {onSaleByPrice}>가격순</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
 										</div>

@@ -80,11 +80,11 @@ function Detail(props) {
 	function ShowPrice() {
 		if (price == 0) {
 			return(
-				<div id="price"><h4><br></br>Not On Sale 😖</h4> </div>
+				<div id="price"><h4><br></br>Not On Sale 😖</h4><hr/> </div>
 			)
 		}else {
 			return(
-				<div id="price"><h4><br></br>price : {price} <ETH style ={{height:'18px'}}/></h4> </div>
+				<div id="price"><h4><br></br>price : {price} <ETH style ={{height:'18px'}}/></h4><hr/> </div>
 			)
 		}
 	}

@@ -142,10 +142,10 @@ function DisplayJackets(props) {
         //console.log(token_id)
         //await props.contract.methods.burn(token_id).send({ from: props.account});
         if(window.confirm("토큰을 삭제하시겠습니까?")){
-            await props.contract.methods.burn(token_id).send({ from: props.account});
+            await props.contract.methods.burn(token_id).send({ from: props.account });
             window.location.reload();
         }  else{
-
+            alert("취소");
         }
     }
 

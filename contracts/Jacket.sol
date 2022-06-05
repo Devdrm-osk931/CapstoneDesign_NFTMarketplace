@@ -121,7 +121,6 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
     //판매 등록
     mapping(uint256 => uint256) public nftTokenPrices;
     uint256[] public onSaleNftTokenArray;
-    uint256[] public recentNftTokenArray;
 
     function setSaleNftToken(uint256 _tokenId, uint256 _price) public {
         address nftTokenOwner = ownerOf(_tokenId);
@@ -171,9 +170,6 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         return nftTokenPrices[_tokenId];
     }
 
-    function getRecentNftToken() public view returns (uint256[] memory) {
-        return recentNftTokenArray;
-    }
 
     //구매함수
     function buyNftToken(uint256 _tokenId) public payable {
@@ -212,15 +208,16 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
     }
 
     function removeToken(uint256 _tokenId) public {
-        // 기존의 자료들
-        recentNftTokenArray.push(_tokenId);
         nftTokenPrices[_tokenId] = 0;
 
         for (uint256 i = 0; i < onSaleNftTokenArray.length; i++) {
             if (nftTokenPrices[onSaleNftTokenArray[i]] == 0) {
-                onSaleNftTokenArray[i] = onSaleNftTokenArray[
-                    onSaleNftTokenArray.length - 1
-                ];
+                for(uint256 j = i; j < onSaleNftTokenArray.length - 1; j++) {
+                    onSaleNftTokenArray[j] = onSaleNftTokenArray[j + 1];
+                }
+                // onSaleNftTokenArray[i] = onSaleNftTokenArray[
+                //     onSaleNftTokenArray.length - 1
+                // ];
                 onSaleNftTokenArray.pop();
             }
         }
