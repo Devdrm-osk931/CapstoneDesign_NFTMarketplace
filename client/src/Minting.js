@@ -6,9 +6,9 @@ import { useParams } from 'react-router-dom'
 import Jacket from "./contracts/Jacket.json";
 import getWeb3 from "./getWeb3";
 import { useState } from 'react';
+import { Form } from 'react-bootstrap';
 
 const Minting = (props) => {
-	const [message, setmessage] = useState('');
 
 	const mint = () => {
         props.contract.methods.mint().send({ from: props.account })
@@ -25,6 +25,7 @@ const Minting = (props) => {
             }
         })
     }
+
 
 	return(
 		<div>
@@ -43,7 +44,8 @@ const Minting = (props) => {
 					event.preventDefault()
 					mint()
 				}}>Mint!</Button>
-				<h2>{message}</h2>
+
+			
 			</div>
 		</div>
 	);

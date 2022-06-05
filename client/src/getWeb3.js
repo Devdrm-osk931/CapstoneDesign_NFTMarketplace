@@ -15,6 +15,11 @@ const getWeb3 = () =>
         } catch (error) {
           reject(error);
         }
+        window.ethereum.on("accountsChanged", function (accounts) {
+          console.log('accountsChanges', accounts);
+          // window.location.reload();
+          window.location.href = '/'
+        })
       }
       // Legacy dapp browsers...
       else if (window.web3) {

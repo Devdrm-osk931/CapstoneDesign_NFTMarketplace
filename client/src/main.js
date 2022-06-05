@@ -5,10 +5,10 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/swiper.scss';
 import DisplayJackets from './DisplayJackets';
 import {Button, Dropdown} from "react-bootstrap";
-import { Container, Nav, Navbar, NavDropdown, FormControl, Form} from "react-bootstrap";
+import { Container, Col} from "react-bootstrap";
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-function MainSilde (){
+function MainSlide (){
   return(
     <Container>
   <div>
@@ -63,11 +63,24 @@ function Main (props){
   return(
     <div>
 
+      <div style = {{marginTop:'20px'}}>
+        <h1>
+          <b>
+            O.O.O Market
+          </b>
+        </h1>
+      </div>
 
-      <MainSilde/>
-      <div style = {{ width:'20%', float: 'left'}}>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <MainSlide/>
+   
+      <div className="component-spacing">
+            <br/>
+        <div className="setmid">
+          <div className="set mid col-xs-12">
+            <Container>
+                <Col style = {{textAlign: 'right'}}>
+                <Dropdown>
+        <Dropdown.Toggle variant="outline-warning" id="dropdown-basic">
           정렬 옵션
         </Dropdown.Toggle>
 
@@ -77,7 +90,12 @@ function Main (props){
           <Dropdown.Item onClick = {sortById}>ID순</Dropdown.Item>
         </Dropdown.Menu>
         </Dropdown>
+                </Col>
+            </Container>
+          </div> 
+        </div>
       </div>
+
         
         
         <DisplayJackets array = {currentArray} account = {props.account} contract = {props.contract} contractAddress = {props.contractAddress} type ={props.type}/>

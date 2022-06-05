@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 
 
 function OnSale(props) {
-    const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
+    const gateway = "https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
     // const url = "./" + props.index.toString()
     return(
         <div className='Onsale'>

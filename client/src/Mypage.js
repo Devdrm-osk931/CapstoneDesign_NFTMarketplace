@@ -122,17 +122,18 @@ function Mypage(props) {
 		const myJackets = props.array;
 		const mySaleJackets =[];
 		const sortedJackets =[];
+
 		for (let i = 0;i<myJackets.length;i++){
 			if(myJackets[i][2] != 0){
 				mySaleJackets.push([Number(myJackets[i][0]), myJackets[i][1], Number(myJackets[i][2])]);
 			}
 		}
 
-		const test =[...myJackets].sort(function(a,b){
+		const test =[...mySaleJackets].sort(function(a,b){
 			return a[0] - b[0];
 		});
 
-		for(let i = 0;i<mySaleJackets.length;i++){
+		for(let i = 0; i<mySaleJackets.length; i++){
 			sortedJackets.push([Number(test[i][0]), test[i][1], Number(test[i][2])]);
 		}
 
@@ -144,17 +145,18 @@ function Mypage(props) {
 		const myJackets = props.array;
 		const mySaleJackets =[];
 		const sortedJackets =[];
-		for (let i = 0;i<myJackets.length;i++){
+
+		for (let i = 0; i< myJackets.length; i++){
 			if(myJackets[i][2] != 0){
 				mySaleJackets.push([Number(myJackets[i][0]), myJackets[i][1], Number(myJackets[i][2])]);
 			}
 		}
 
-		const test =[...myJackets].sort(function(a,b){
+		const test =[...mySaleJackets].sort(function(a,b){
 			return a[2] - b[2];
 		});
 
-		for(let i = 0;i<mySaleJackets.length;i++){
+		for(let i = 0; i<mySaleJackets.length; i++){
 			sortedJackets.push([Number(test[i][0]), test[i][1], Number(test[i][2])]);
 		}
 
@@ -223,47 +225,48 @@ function Mypage(props) {
 				<h5>Connected account : {props.account} </h5>
 			</Container>
 
-			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '0px' }}>
+			<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '0px'}}>
 				<br/>
 				<h4>My NFTs</h4>
-				<div className='Mypage__button'>
-						{/* <Button variant="outline-warning" style = {{marginLeft: '85%'}} onClick= {(event) => {
-						event.preventDefault()
-						// check_array()
-						getMyJackets();
-	 					}}>All</Button>
-						{' '}
-						<Button variant="outline-warning" onClick={getMySaleJackets}>On Sale</Button>{' '} */}
-						<div style = {{ width: '100%',float:'left'}}>
+				<div className='Mypage__button'>				
+					
+					<div className="setmid">
+						<div className="set mid col-xs-12">
+							<Container>
+								<Row xs ={1} md={2}>
+									<Col></Col>
+									
+									<Col>
+										<div style = {{textAlign: 'right'}}>
+											<Dropdown style ={{display: 'inline'}}>
+												<Dropdown.Toggle variant="outline-warning" id="dropdown-basic" style ={{display: 'inline'}}>
+													All
+												</Dropdown.Toggle>
 
-							<div style = {{width: '89%'}}>
+												<Dropdown.Menu>
+													<Dropdown.Item onClick= {getMyJackets}>등록순</Dropdown.Item>
+													<Dropdown.Item onClick= {allById}>ID순</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>
+									
+											{' '}
+							
+											<Dropdown style ={{display: 'inline'}}>
+												<Dropdown.Toggle variant="outline-warning" id="dropdown-basic">
+													On Sale
+												</Dropdown.Toggle>
 
-								<Dropdown>
-									<Dropdown.Toggle variant="outline-warning" id="dropdown-basic" style ={{float:'right'}}>
-										On Sale
-									</Dropdown.Toggle>
-
-									<Dropdown.Menu>
-										<Dropdown.Item onClick= {onSaleByPrice}>가격순</Dropdown.Item>
-										<Dropdown.Item onClick= {onSaleById}>ID순</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
-
-								<Dropdown>
-									<Dropdown.Toggle variant="outline-warning" id="dropdown-basic" style ={{marginLeft:'86.7%', float:'left'}}>
-										All
-									</Dropdown.Toggle>
-
-									<Dropdown.Menu>
-										<Dropdown.Item onClick= {getMyJackets}>등록순</Dropdown.Item>
-										<Dropdown.Item onClick= {allById}>ID순</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
-
-							</div>
-
+												<Dropdown.Menu>
+													<Dropdown.Item onClick= {onSaleByPrice}>가격순</Dropdown.Item>
+													<Dropdown.Item onClick= {onSaleById}>ID순</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>
+										</div>
+									</Col>
+								</Row>
+							</Container>
 						</div>
-
+					</div>					
 				</div>
 
 				<div>

@@ -95,11 +95,6 @@
 	border: 1px solid black;
 }
 
-.deil__button{
-	width: 100px;
-	height: 50px;
-}
-
 /* my page */
 .profile{
   margin-top: 5%;
@@ -118,23 +113,6 @@
 .Minting{
   margin: 16px;
 }
-
-/* display */
-/* .Onsale img:hover{
-  transform: scale(1.1);
-  border: solid 1px var(--color-orange);
-  filter: drop-shadow(1px 1px 1px var(--color-light-grey));
-  transform: translateY(-10px);
-  border-radius: 8px;
-} */
-
-/* .Onsale img{
-	transition: all ease;
-} */
-
-/* #col:hover{
-	filter: drop-shadow(1px 1px 1px var(--color-light-grey));
-} */
 
 div#display__col:hover{
 	border: solid 1px var(--color-orange);
@@ -212,3 +190,8 @@ text-align: left;
 .hide{
 	  visibility :hidden;
 	  }
+
+.card{
+	width: "22rem"
+}
+

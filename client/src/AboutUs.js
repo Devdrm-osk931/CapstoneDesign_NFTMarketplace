@@ -35,33 +35,35 @@ function AboutUs(){
         <Container>
         
         <Row>
-          <Col>
+        <Col>
              <div className = "profile-align-center">
-                 <img src = "/profile2.png"></img>
-                 <p className = "AboutUs-font">고승렬</p>
-                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>1998.01.26 <br></br>2017112172 <br></br>정보통신공학과</div>
-                 </div>
-                 </div>
-          </Col>
-          <Col>
-             <div className = "profile-align-center">
-                 <img src = "/Kim.png"></img>
-                 <p className = "AboutUs-font">김민재</p>
-                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>1997.03.12 <br></br>2019113592 <br></br>정보통신공학과</div>
-                 </div>
-                 </div>
-          </Col>
-          <Col>
-             <div className = "profile-align-center">
-                 <img src = "/profile2.png"></img>
+                 <img src = "/Oh.jpg" style={{width:'160px', height:'200px'}}></img>
                  <p className = "AboutUs-font">오석교</p>
                  <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>1996.07.28 <br></br>2017112204 <br></br>정보통신공학과</div>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1996.07.28 <br></br>2017112204 <br></br>정보통신공학과<br/><b>Team Leader</b></div>
                  </div>
                  </div>
           </Col>
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/Ko.jpeg" style={{width:'160px', height:'200px'}}></img>
+                 <p className = "AboutUs-font">고승렬</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1998.01.26 <br></br>2017112172 <br></br>정보통신공학과<br/><b>FrontEnd/BackEnd Dev</b></div>
+                 </div>
+                 </div>
+          </Col>
+
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/Jeong.jpeg" style={{width:'150px', height:'200px'}}></img>
+                 <p className = "AboutUs-font" >정동환</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1998.11.18<br></br>2017112189 <br></br>정보통신공학과<br/><b>FrontEnd/BackEnd Dev</b></div>
+                 </div>
+                 </div>
+          </Col>
+          
         </Row>
 
         <Container fluid>
@@ -77,29 +79,33 @@ function AboutUs(){
                  <img src = "/Lee.jpg"></img>
                  <p className = "AboutUs-font">이지환</p>
                  <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>2000.09.13 <br></br>2019112120 <br></br>정보통신공학과</div>
+                 <div style={{width:'60%', marginLeft:'20%'}}>2000.09.13 <br></br>2019112120 <br></br>정보통신공학과<br/><b>총무<br/>Web Designer</b></div>
                  </div>
                  </div>
           </Col>
+
+          <Col>
+             <div className = "profile-align-center">
+                 <img src = "/Kim.png"></img>
+                 <p className = "AboutUs-font">김민재</p>
+                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1997.03.12 <br></br>2019113592 <br></br>정보통신공학과<br/><b>Web Designer</b></div>
+                 </div>
+                 </div>
+          </Col>
+          
           <Col>
              <div className = "profile-align-center">
                  <img src = "/profile2.png"></img>
                  <p className = "AboutUs-font">전나연</p>
                  <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>1999.10.11<br></br> 2018111688 <br></br>정보통신공학과</div>
-                 </div>
-                 </div>
-          </Col>
-          <Col>
-             <div className = "profile-align-center">
-                 <img src = "/profile2.png"></img>
-                 <p className = "AboutUs-font">정동환</p>
-                 <div style ={{backgroundColor:"#F7F5F2", height:'120px'}}>
-                 <div style={{width:'60%', marginLeft:'20%'}}>1998.11.18<br></br>2017112189 <br></br>정보통신공학과</div>
+                 <div style={{width:'60%', marginLeft:'20%'}}>1999.10.11<br></br> 2018111688 <br></br>정보통신공학과<br/><b>NFT Designer</b></div>
                  </div>
                  </div>
           </Col>
         </Row>
+
+        
         </Container>
         </Container>
 

@@ -1,17 +1,12 @@
 import './App.css';
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { renderMatches, useParams } from 'react-router-dom'
 import getWeb3 from "./getWeb3";
 import Web3 from 'web3';
-import Mypage from './Mypage';
 import Modal from "./Modal";
 import axios from 'axios';
 import { ReactComponent as ETH } from './image/ethereum-brands.svg';
-
-// axios.get(https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/40.json,[,config])
-// .then((Response)=>{console.log(Response.data)})
-//   .catch((Error)=>{console.log(Error)})
 
 function Detail(props) {
 
@@ -20,7 +15,6 @@ function Detail(props) {
 	function DetailButton () {
 		console.log("owner",typeof(owner), owner);
 		console.log("props.account",typeof(props.account),props.account);
-		console.log("image src",imageSrc);
 		if(owner === props.account)
 		{
 			return(
@@ -98,7 +92,6 @@ function Detail(props) {
 	const nft_sell = async() =>{
 		var test = await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
 		var array = await props.contract.methods.getSaleNftTokens().call();
-		console.log(array);
 		window.location.replace("/mypage")
 	}
 
@@ -115,21 +108,11 @@ function Detail(props) {
 	const getinformation =async()=>{
 		await axios.get('https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/'+id+'.json')
 		.then((Response)=>{
-			// console.log(Response.data);
-			// console.log(typeof(Response.data));
-			// console.log(Response.data.attributes)
-			// console.log(typeof(Response.data.attributes))
-			setImageSrc(Response.data.image);
 			setInformation(Response.data.attributes);
-			// console.log("information",information)
-
-			Response.data.attributes.map((info)=>{
-				console.log(info.trait_type,":", info.value)})
 		})
 		.catch((Error)=>{console.log(Error)})
 	}
 	const [information, setInformation]=useState();
-	const [imageSrc, setImageSrc] = useState();
 
 	function PrintJacket() {
 
@@ -142,30 +125,21 @@ function Detail(props) {
 			{
 				(information && Object.keys(information).length > 1) &&
 				<>
-					<hr/>
-					<h2>Properties</h2>
-					<h4>{information[1].trait_type} : {information[1].value} </h4>
-					<p> {percent} have this trait</p>
+					<Card className = "card border-warning border-2">
+						<Card.Body>
+						<Card.Title className = "text-warning">{information[1].trait_type} </Card.Title>
+						<Card.Text className = "card__test">
+							<b> {information[1].value}   </b>
+						</Card.Text>
+						<Card.Subtitle className="mb-2 text-muted card__subtitle">
+						{percent} have this trait
+						</Card.Subtitle >
+						{/* <Card.Link href="#"> For Students</Card.Link> */}
+						</Card.Body>
+					</Card>
 				</>
 			}
 			</>
-
-	// 		<>
-	// 		<Card style={{ width: "22rem" }}>
-    //     <Card.Body>
-    //       <Card.Title style={{ color: "blue" }}>GEEKSFORGEEKS</Card.Title>
-    //       <Card.Subtitle className="mb-2 text-muted">
-    //         One Stop For all CS subjects
-    //       </Card.Subtitle>
-    //       <Card.Text>
-    //         GeeksforGeeks provides a platform for all the students to study
-    //         about all the subjects in CSE.
-    //       </Card.Text>
-    //       <Card.Link href="#"> For Students</Card.Link>
-    //     </Card.Body>
-    //   </Card>
-	// 		</>
-
 		);
 	}
 	function PrintLogo() {
@@ -180,8 +154,18 @@ function Detail(props) {
 			{
 				(information && Object.keys(information).length > 2) &&
 				<div>
-					<h4>{information[2].trait_type} : {information[2].value} </h4>
-					<p>{percent}  have this trait</p>
+					<Card className = "card border-warning border-2">
+						<Card.Body>
+						<Card.Title className = "text-warning">{information[2].trait_type} </Card.Title>
+						<Card.Text className = "card__test">
+							<b> {information[2].value}   </b>
+						</Card.Text>
+						<Card.Subtitle className="mb-2 text-muted card__subtitle">
+						{percent} have this trait
+						</Card.Subtitle >
+						{/* <Card.Link href="#"> For Students</Card.Link> */}
+						</Card.Body>
+					</Card>
 				</div>
 			}
 			</div>
@@ -198,8 +182,18 @@ function Detail(props) {
 			{
 				(information && Object.keys(information).length > 3) &&
 				<div>
-					<h4>{information[3].trait_type} : {information[3].value} </h4>
-					<p>{percent} have this trait</p>
+					<Card className = "card border-warning border-2">
+						<Card.Body>
+						<Card.Title className = "text-warning">{information[3].trait_type} </Card.Title>
+						<Card.Text className = "card__test">
+							<b> {information[3].value}   </b>
+						</Card.Text>
+						<Card.Subtitle className="mb-2 text-muted card__subtitle">
+						{percent} have this trait
+						</Card.Subtitle >
+						{/* <Card.Link href="#"> For Students</Card.Link> */}
+						</Card.Body>
+					</Card>
 				</div>
 			}
 			</div>
@@ -217,8 +211,18 @@ function Detail(props) {
 			{
 				(information && Object.keys(information).length > 4) &&
 				<div>
-					<h4>{information[4].trait_type} : {information[4].value} </h4>
-					<p>{percent} have this trait</p>
+					<Card className = "card border-warning border-2">
+						<Card.Body>
+						<Card.Title className = "text-warning">{information[4].trait_type} </Card.Title>
+						<Card.Text className = "card__test">
+							<b> {information[4].value}   </b>
+						</Card.Text>
+						<Card.Subtitle className="mb-2 text-muted card__subtitle">
+						{percent} have this trait
+						</Card.Subtitle >
+						{/* <Card.Link href="#"> For Students</Card.Link> */}
+						</Card.Body>
+					</Card>
 				</div>
 			}
 			</div>
@@ -316,7 +320,7 @@ function Detail(props) {
 	<Container>
 		<div className='Detail__contents'>
 			<div id ="section__image" style ={{width : '60%', marginTop: '60px'}}>
-				<img className= "detail__image"src = {imageSrc}/>
+				<img className= "detail__image" src = {"https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/" + id + ".png"}/>
 			</div>
 
 			<div id = "etc" style ={{width : '30%', marginTop: "60px"}}>
@@ -328,30 +332,39 @@ function Detail(props) {
 						<p><i>Made By SOKSAK</i></p>
 						<p><i>All Rights Reserved</i></p>
 				</div>
-				<PrintJacket/>
-				<PrintLogo/>
-				<PrintCollege/>
-				<PrintStudent_ID/>
-				<DetailButton/>
 
-				<React.Fragment>
-					<SellButton/>{' '}
-					<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
-						<img className = "detail__image" src = {imageSrc}/>
-						<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
-						<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
-					</Modal>
-				</React.Fragment>
+				<hr/>
+				<h3 className='properties'>Properties </h3>
 
-				<React.Fragment>
-					<EditButton/>{' '}
-					<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
-						<img className = "detail__image" src = {imageSrc}/>
-						<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
-						<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
-					</Modal>
-				</React.Fragment>
-				<RemoveButton/>
+				<div class="row row-cols-1 row-cols-md-2 g-4 mt-1 mb-1">
+					<div class="col"><PrintJacket/></div>
+					<div class="col"><PrintLogo/></div>
+					<div class="col"><PrintCollege/></div>
+					<div class="col"><PrintStudent_ID/></div>
+				</div>
+
+				<div className= "Detail__button">
+					<DetailButton/>
+					<React.Fragment>
+						<SellButton/>{' '}
+						<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
+							<img className = "detail__image" src = {"https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/" + id + ".png"}/>
+							<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+							<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
+						</Modal>
+					</React.Fragment>
+
+					<React.Fragment>
+						<EditButton/>{' '}
+						<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
+							<img className = "detail__image" src = {"https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/" + id + ".png"}/>
+							<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
+							<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>
+						</Modal>
+					</React.Fragment>
+					<RemoveButton/>
+				</div>
+
 			</div>
 		</div>
 	</Container>

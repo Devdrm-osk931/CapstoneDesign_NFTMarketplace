@@ -1,44 +1,6 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
-// import Footer from '../components/footer';
-import { createGlobalStyle } from 'styled-components';
 import { Container, Col} from "react-bootstrap";
-
-
-
-const GlobalStyles = createGlobalStyle`
-  header#myHeader.navbar.sticky.white {
-    background: #403f83;
-    border-bottom: solid 1px #403f83;
-  }
-  header#myHeader.navbar .search #quick_search{
-    color: #fff;
-    background: rgba(255, 255, 255, .1);
-  }
-  header#myHeader.navbar.white .btn, .navbar.white a, .navbar.sticky.white a{
-    color: #fff;
-  }
-  header#myHeader .dropdown-toggle::after{
-    color: rgba(255, 255, 255, .5);
-  }
-  header#myHeader .logo .d-block{
-    display: none !important;
-  }
-  header#myHeader .logo .d-none{
-    display: block !important;
-  }
-  @media only screen and (max-width: 1199px) {
-    .navbar{
-      background: #403f83;
-    }
-    .navbar .menu-line, .navbar .menu-line1, .navbar .menu-line2{
-      background: #fff;
-    }
-    .item-dropdown .dropdown a{
-      color: #fff !important;
-    }
-  }
-`;
 
 const contact= function() {
 
@@ -102,11 +64,11 @@ alert("Message failed...");
            <div class="padding40 box-rounded mb30">
               <address classname = "sector">
               <h3>Personal Office</h3>
-                😊<a href="https://www.naver.com">NFT Provider</a><br></br>
-                😊<a href="https://www.naver.com">Front-End Team1</a><br></br>
-                😊<a href="https://www.naver.com">Front-End Team2</a><br></br>
-                😊<a href ="https://www.naver.com">Back-End Team1</a><br></br>
-                😊<a href="https://www.naver.com">Back-End Team2</a><br></br>
+                😊<a href="https://www.instagram.com/o.o.o.team1/">Manager</a><br></br>
+                😊<a href="https://www.instagram.com/o.o.o.team2/">Front-End Team1</a><br></br>
+                😊<a href="https://www.instagram.com/o.o.o.team2/">Front-End Team2</a><br></br>
+                😊<a href ="https://www.instagram.com/o.o.o.team3/">Back-End Team1</a><br></br>
+                😊<a href="https://www.instagram.com/o.o.o.team3/">Back-End Team2</a><br></br>
               </address>
             </div>
 
@@ -114,15 +76,13 @@ alert("Message failed...");
               <address className="sector">
               <h3>Team SOKSAK Office</h3>
                 Dongguk University, Seoul<br></br>
-                +82 000 0000<br></br>
-                Capstone@dgu.ac.kr<br></br>
-                <a href="subheader.jpg" download ="manual download">manual download</a><br></br>
+                +82 10 5066 9037<br></br>
+                soksak_info@gmail.com<br></br>
             </address>
             </div>
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
       </Container>
       
       <Container fluid>

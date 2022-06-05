@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import Jacket from "./contracts/Jacket.json";
 import getWeb3 from "./getWeb3";
-import { Container, Nav, Navbar, NavDropdown, Button, FormControl, Form, Row, Col} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DisplayJackets from "./DisplayJackets";
 import Detail from "./Detail";
 import Mypage from './Mypage';
 import Minting from './Minting';
 import Contact from "./Contact";
 import AboutUs from "./AboutUs";
-import Main from './main';
+import Main from './Main';
 import Footer from './Footer';
 
 class App extends Component {
@@ -24,7 +23,7 @@ class App extends Component {
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0])
       //const sale_jackets = Array(30).fill().map((v,i)=> i+1)
-      const gateway = "https://gateway.pinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
+      const gateway = "https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -80,7 +79,7 @@ class App extends Component {
       else{
         const response = await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
         if(response) {
-          this.setState({ApprovalState:response});
+          this.setState({ApprovalState:true});
           console.log(response)
         }
       }
