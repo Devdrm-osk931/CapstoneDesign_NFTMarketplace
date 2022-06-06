@@ -39,23 +39,23 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         mintedId = id;
     }
 
-    // function publicMint(uint256 num) public {
-    //     require(numArray.length >= num, "too many minting");
-    //     for (uint256 i = 0; i < num; i++) {
-    //         uint256 random = uint256(
-    //             keccak256(
-    //                 abi.encodePacked(
-    //                     block.difficulty,
-    //                     block.timestamp,
-    //                     numArray
-    //                 )
-    //             )
-    //         ) % numArray.length;
-    //         _safeMint(msg.sender, numArray[random]);
-    //         numArray[random] = numArray[numArray.length - 1];
-    //         numArray.pop();
-    //     }
-    // }
+    function publicMint(uint256 num) public {
+        require(numArray.length >= num, "too many minting");
+        for (uint256 i = 0; i < num; i++) {
+            uint256 random = uint256(
+                keccak256(
+                    abi.encodePacked(
+                        block.difficulty,
+                        block.timestamp,
+                        numArray
+                    )
+                )
+            ) % numArray.length;
+            _safeMint(msg.sender, numArray[random]);
+            numArray[random] = numArray[numArray.length - 1];
+            numArray.pop();
+        }
+    }
 
     // function mint() public returns (uint256) {
     //     _tokenIds.increment();
