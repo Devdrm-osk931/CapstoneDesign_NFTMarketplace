@@ -82,7 +82,7 @@ function Detail(props) {
 	const nft_sell = async() =>{
 
 		if(parseFloat(text) > 0 && !text.includes(".")){
-			await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
+			await props.contract.methods.setSaleNftToken(id, text).send({from: props.account});
 			window.location.replace("/mypage")
 		}
 
@@ -94,7 +94,7 @@ function Detail(props) {
 
 	const nft_change_price=async()=>{
 		if(parseFloat(text) > 0 && !text.includes(".")){
-		await props.contract.methods.changePrice(id, text).send({from: props.account, gas:300000});
+		await props.contract.methods.changePrice(id, text).send({from: props.account});
 		setPrice(text);
 		window.location.replace('/');
 		}

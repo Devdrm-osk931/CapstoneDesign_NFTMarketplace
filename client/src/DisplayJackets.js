@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import OnSale from "./OnSale";
@@ -80,11 +80,10 @@ function DisplayJackets(props) {
 
     const Cancel = async(token_id) => {
         if(window.confirm("판매를 취소하시겠습니까?")){
-            await props.contract.methods.removeToken(token_id).send({from: props.account, gas:300000});
-		await props.contract.methods.getSaleNftTokens().call();
+            await props.contract.methods.removeToken(token_id).send({from: props.account });
 		window.location.replace("/mypage")
         }  else{
-
+            // 판매등록 취소 거부
         }
 
     }

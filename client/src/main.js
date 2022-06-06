@@ -1,11 +1,11 @@
 import './App.css';
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/swiper.scss';
 import DisplayJackets from './DisplayJackets';
-import {Button, Dropdown} from "react-bootstrap";
-import { Container, Col} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+import { Container, Col } from "react-bootstrap";
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
 function MainSlide(){

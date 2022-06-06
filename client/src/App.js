@@ -12,7 +12,7 @@ import Main from './Main';
 import Footer from './Footer';
 
 class App extends Component {
-  state = { total: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
+  state = { total: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
 
   componentDidMount = async () => {
     try {
@@ -21,7 +21,6 @@ class App extends Component {
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-      const balance = await web3.eth.getBalance(accounts[0])
       const gateway = "https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
 
       // Get the contract instance.
@@ -34,7 +33,7 @@ class App extends Component {
       );
 
 
-      this.setState({ web3, accounts, balance, contract: instance, gateway, contractAddress }, this.runExample);
+      this.setState({ web3, accounts, contract: instance, gateway, contractAddress }, this.runExample);
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
