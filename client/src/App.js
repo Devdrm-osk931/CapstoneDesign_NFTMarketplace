@@ -12,7 +12,7 @@ import Main from './Main';
 import Footer from './Footer';
 
 class App extends Component {
-  state = { storageValue: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
+  state = { total: 0, ApprovalState: null, minted_jackets: [], web3: null, accounts: null, balance: null, sale_jackets: [], contract: null, gateway: null, contractAddress: null};
 
   componentDidMount = async () => {
     try {
@@ -22,7 +22,6 @@ class App extends Component {
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0])
-      //const sale_jackets = Array(30).fill().map((v,i)=> i+1)
       const gateway = "https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/"
 
       // Get the contract instance.
@@ -47,10 +46,9 @@ class App extends Component {
   runExample = async () => {
     const { accounts, contract, contractAddress } = this.state;
 
-    const ApprovalState = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
-    const response = await contract.methods.totalSupply().call();
+    const ApprovalState = await contract.methods.isApprovedForAll(this.state.accounts[0], contractAddress).call();
+    const totalSupply = await contract.methods.totalSupply().call();
     const tempnftListArray = await contract.methods.getSaleNftTokens().call();
-    console.log(tempnftListArray);
     const nftArray = [];  // 현재 판매중인 NFT 리스트 받아옴
 
 
@@ -64,13 +62,11 @@ class App extends Component {
 			// id, owner_address, price
 			minted_jackets.push([Number(temp[i][0]), temp[i][1], Number(temp[i][3])]);
 		}
-    console.log(nftArray);
-    this.setState({ApprovalState: ApprovalState, storageValue: response, sale_jackets: nftArray, minted_jackets: minted_jackets})
-    console.log("minted:", this.state.minted_jackets);
+    this.setState({ApprovalState: ApprovalState, total: totalSupply, sale_jackets: nftArray, minted_jackets: minted_jackets})
   };
 
   render() {
-    const giveapprove = async() =>{
+    const giveApprove = async() =>{
       if(this.state.ApprovalState === true){
         alert('이미 권한이 부여되어 있습니다.');
       }
@@ -78,12 +74,11 @@ class App extends Component {
         const response = await this.state.contract.methods.setApprovalForAll(this.state.contractAddress, true).send({ from: this.state.accounts[0]});
         if(response) {
           this.setState({ApprovalState:true});
-          console.log(response)
         }
       }
     }
 
-    const revokeapprove = async() => {
+    const revokeApprove = async() => {
       if (this.state.ApprovalState === false) {
         alert("이미 권한이 철회 되었습니다.")
       }else {
@@ -94,15 +89,13 @@ class App extends Component {
       }
     }
 
-    const check_approve = async() => {
-      const auth = await this.state.contract.methods.isApprovedForAll(this.state.accounts[0], this.state.contractAddress).call();
-      console.log("현재주소:" + this.state.accounts[0])
-      console.log("현재 권한: " + auth);
-      console.log("state 권한: " + this.state.ApprovalState);
-    }
-
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return <div>
+              <h3>연결된 계정을 찾을 수 없습니다!<br/>
+              O.O.O Marketplace에 접속하려면 메타마스크 연결을 확인해주세요! 😥<br/>
+              <br/>
+              <a href="https://metamask.io/">메타마스크 설치하기 🦊</a>
+              </h3></div>;
     }
 
     
@@ -122,69 +115,26 @@ class App extends Component {
               <Nav.Link href="/minting">Minting<span> 📲 </span></Nav.Link>
               <NavDropdown title="MyPage🔐" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/mypage" eventKey="disabled">My Address: {this.state.accounts[0]}</NavDropdown.Item>
-                <NavDropdown.Item onClick = {giveapprove}>Grant</NavDropdown.Item>
-                <NavDropdown.Item onClick = {revokeapprove}>Revoke</NavDropdown.Item>
-                <NavDropdown.Item onClick={check_approve}> Check </NavDropdown.Item>
+                <NavDropdown.Item onClick = {giveApprove}>Grant</NavDropdown.Item>
+                <NavDropdown.Item onClick = {revokeApprove}>Revoke</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-          </Container>
-      </Navbar>
-
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main array = {this.state.sale_jackets} account = {this.state.accounts[0]} contract = {this.state.contract} contractAddress = {this.state.contractAddress} type = 'Main'/>}></Route>
-        <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
-        <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts[0]} array={this.state.minted_jackets} contractAddress = {this.state.contractAddress} type = 'MyPage'/>}></Route>
-        <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]}/>}></Route>
-        <Route path = "/contact" element = {<Contact/>}></Route>
-        <Route path = "/aboutus" element = {<AboutUs/>}></Route>
-      </Routes>
-      </BrowserRouter>
-
-      {/* <div className="component-spacing">
-      <DisplayJackets array = {this.state.sale_jackets}/>
-      </div>
-
-      <footer>
-        <h2>This is footer</h2>
-      </footer> */}
-
-      {/* <Container>
-      <h1>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h1>
-      </Container>
-      <footer  style={{ height: '150px' , background: 'gray', width:'100%' }}>
-      <Navbar expand="lg">
-      <Container>
-        <Navbar.Brand><img src={ require('./image/footerlogo.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
-        </Navbar.Brand>
-        <Row>
-        <Col>
-           <div>
-
-           </div>
-        </Col>
-        <Col>
-           <div>
-           <div style={{width:'60%', marginLeft:'10%'}}>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</div>
-
-          </div>
-        </Col>
-        <Col>
-           <div>
-
-            <div><h5>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤCapstone Design - SOKSAK's  ㅤNFT MarketPlace Service    </h5></div>
-
-          </div>
-        </Col>
-      </Row>
         </Container>
-    </Navbar>
-    
-  
-  </footer> */}
+        </Navbar>
 
-    <Footer></Footer>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main array = {this.state.sale_jackets} account = {this.state.accounts[0]} contract = {this.state.contract} contractAddress = {this.state.contractAddress} type = 'Main'/>}></Route>
+            <Route path="/detail/:id" element = {<Detail contract = {this.state.contract} src = {this.state.gateway} account ={this.state.accounts[0]} ApprovalState = {this.state.ApprovalState} contractAddress = {this.state.contractAddress}/>}></Route>
+            <Route path ="/mypage/" element ={<Mypage contract = {this.state.contract} account ={this.state.accounts[0]} array={this.state.minted_jackets} contractAddress = {this.state.contractAddress} type = 'MyPage'/>}></Route>
+            <Route path ="/minting/" element ={<Minting contract = {this.state.contract} account = {this.state.accounts[0]} total = {this.state.total}/>}></Route>
+            <Route path = "/contact" element = {<Contact/>}></Route>
+            <Route path = "/aboutus" element = {<AboutUs/>}></Route>
+          </Routes>
+        </BrowserRouter>
+
+        <Footer></Footer>
       </div>
     );
   }

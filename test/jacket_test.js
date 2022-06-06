@@ -14,7 +14,6 @@ contract("Jacket", accounts => {
         const result = []
 
 
-
         // Mint 100 times
         for (var cnt = 0; cnt < 100; cnt ++) {
             await jacketInstance.mint({ from: accounts[0] });

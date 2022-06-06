@@ -1,8 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
-import { renderMatches, useParams } from 'react-router-dom'
-import getWeb3 from "./getWeb3";
+import { Container, Button, Card } from "react-bootstrap";
+import { useParams } from 'react-router-dom'
 import Web3 from 'web3';
 import Modal from "./Modal";
 import axios from 'axios';
@@ -13,27 +12,21 @@ function Detail(props) {
 	const {id}=useParams();
 
 	function DetailButton () {
-		console.log("owner",typeof(owner), owner);
-		console.log("props.account",typeof(props.account),props.account);
 		if(owner === props.account)
 		{
 			return(
-				// <Button variant="outline-warning" disabled>Owner</Button>
 				<></>
 			)
 		}
-		else
 		return(
 			<Button onClick={clickBuy} variant="outline-warning">Buy</Button>
 		)
-
 	}
 
 	function SellButton() {
-		console.log(props.ApprovalState);
 		if (price == 0 && props.ApprovalState) {
 			return (
-				<Button className = "Detail" variant ="outline-warning" onClick={openModal} >Sell</Button>
+				<Button className = "Detail" variant ="outline-warning" onClick={openSellModal} >Sell</Button>
 			)
 		}else if(price == 0 & !props.ApprovalState) {
 			return (
@@ -44,7 +37,6 @@ function Detail(props) {
 		}
 		else {
 			return(
-				// <Button className = "Detail" variant ="outline-warning" disabled>Sell</Button>
 				<></>
 			)
 		}
@@ -54,12 +46,11 @@ function Detail(props) {
 		// 판매중이지 않은 경우
 		if (price == 0 || owner != props.account) {
 			return(
-					// <Button className = "Detail" variant = "outline-warning" disabled>Edit</Button>
 					<></>
 			)
 		}else {
 			return(
-					<Button className = "Detail" variant ="outline-warning" onClick={openModal2} >Edit</Button>
+					<Button className = "Detail" variant ="outline-warning" onClick={openEditModal} >Edit</Button>
 			)
 		}
 	}
@@ -67,7 +58,6 @@ function Detail(props) {
 	function RemoveButton() {
 		if (price == 0 || owner != props.account) {
 			return(
-			// <Button variant = "outline-warning" disabled>Remove</Button>
 			<></>
 			)
 		}else{
@@ -92,9 +82,8 @@ function Detail(props) {
 	const nft_sell = async() =>{
 
 		if(parseFloat(text) > 0 && !text.includes(".")){
-		var test = await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
-		var array = await props.contract.methods.getSaleNftTokens().call();
-		window.location.replace("/mypage")
+			await props.contract.methods.setSaleNftToken(id, text).send({from: props.account, gas:300000});
+			window.location.replace("/mypage")
 		}
 
 		else{
@@ -104,16 +93,10 @@ function Detail(props) {
 	}
 
 	const nft_change_price=async()=>{
-
-		var array2 = await props.contract.methods.getSaleNftTokens().call();
-		console.log('first array',array2);
-
 		if(parseFloat(text) > 0 && !text.includes(".")){
-		let test = await props.contract.methods.changePrice(id, text).send({from: props.account, gas:300000});
-		var array = await props.contract.methods.getSaleNftTokens().call();
+		await props.contract.methods.changePrice(id, text).send({from: props.account, gas:300000});
 		setPrice(text);
 		window.location.replace('/');
-		console.log(array);
 		}
 		else{
 			alert("1 이상의 정수를 입력하세요.")
@@ -123,13 +106,12 @@ function Detail(props) {
 
 	const getStatus = async() => {
 		const tempOwner = await props.contract.methods.ownerOf(id).call();
-		console.log("getowner",owner,typeof(owner));
 		const price = await props.contract.methods.getNftTokenPrice(id).call();
 		setPrice(price);
 		setOwner(tempOwner);
-		console.log(owner);
 	}
 	useEffect(getStatus, [props.contract]);
+
 
 	const getinformation =async()=>{
 		await axios.get('https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/'+id+'.json')
@@ -140,12 +122,11 @@ function Detail(props) {
 	}
 	const [information, setInformation]=useState();
 
-	function PrintJacket() {
 
+	function PrintJacket() {
 		let percent;
 		if(information && Object.keys(information).length > 1)
 			percent = '10%';
-
 		return(
 			<>
 			{
@@ -160,7 +141,6 @@ function Detail(props) {
 						<Card.Subtitle className="mb-2 text-muted card__subtitle">
 						{percent} have this trait
 						</Card.Subtitle >
-						{/* <Card.Link href="#"> For Students</Card.Link> */}
 						</Card.Body>
 					</Card>
 				</>
@@ -168,13 +148,13 @@ function Detail(props) {
 			</>
 		);
 	}
-	function PrintLogo() {
 
+
+	function PrintLogo() {
 		let percent;
 		if(information && Object.keys(information).length > 2){
 			percent =  information[2].value == ('Lotus_Black' || 'Lotus_White') ? '5%' :  '22.5%';
 		}
-
 		return(
 			<div>
 			{
@@ -189,7 +169,6 @@ function Detail(props) {
 						<Card.Subtitle className="mb-2 text-muted card__subtitle">
 						{percent} have this trait
 						</Card.Subtitle >
-						{/* <Card.Link href="#"> For Students</Card.Link> */}
 						</Card.Body>
 					</Card>
 				</div>
@@ -197,12 +176,12 @@ function Detail(props) {
 			</div>
 		);
 	}
-	function PrintCollege() {
 
+
+	function PrintCollege() {
 		let percent;
 		if(information && Object.keys(information).length > 3)
 			percent = '25%';
-
 		return(
 			<div>
 			{
@@ -217,7 +196,6 @@ function Detail(props) {
 						<Card.Subtitle className="mb-2 text-muted card__subtitle">
 						{percent} have this trait
 						</Card.Subtitle >
-						{/* <Card.Link href="#"> For Students</Card.Link> */}
 						</Card.Body>
 					</Card>
 				</div>
@@ -225,13 +203,13 @@ function Detail(props) {
 			</div>
 		);
 	}
-	function PrintStudent_ID() {
 
+
+	function PrintStudent_ID() {
 		let percent;
 		if(information && Object.keys(information).length > 4){
 			percent = information[4].value == ('17' || '19') ? '33%' :'34%';
 		}
-
 		return(
 			<div>
 			{
@@ -246,7 +224,6 @@ function Detail(props) {
 						<Card.Subtitle className="mb-2 text-muted card__subtitle">
 						{percent} have this trait
 						</Card.Subtitle >
-						{/* <Card.Link href="#"> For Students</Card.Link> */}
 						</Card.Body>
 					</Card>
 				</div>
@@ -257,24 +234,25 @@ function Detail(props) {
 
 	useEffect(getinformation,[]);
 
+
 	const [modalOpen, setModalOpen] = useState(false);
 	const [edit_modal_open, set_edit_Modal_open] = useState(false);
 	const [price, setPrice] = useState(0);
 	const [owner, setOwner] = useState();
 
-	const openModal = () =>{
+	const openSellModal = () =>{
 		setModalOpen(true);
 	}
 
-	const closeModal = () =>{
+	const closeSellModal = () =>{
 		setModalOpen(false);
 	}
 
-	const openModal2 = () =>{
+	const openEditModal = () =>{
 		set_edit_Modal_open(true);
 	}
 
-	const closeModal2 = () =>{
+	const closeEditModal = () =>{
 		set_edit_Modal_open(false);
 	}
 
@@ -296,38 +274,26 @@ function Detail(props) {
 
 	const clickBuy = async() => {
 		const ownerAddress = await props.contract.methods.ownerOf(id).call();
-		const myAddress = props.account;
 		const price = await props.contract.methods.nftTokenPrices(id).call();
 		const weiPrice = Web3.utils.toWei(price);
-		const isApproved = await props.contract.methods.isApprovedForAll(ownerAddress, props.contractAddress).call();
-		console.log(isApproved);
-		console.log(props.ApprovalState);
-		console.log("Owner: ", ownerAddress);
-		console.log("Contract: ", props.contractAddress);
-		console.log(price);
-		console.log(weiPrice);
+
 		if(props.account === ownerAddress)
-				alert("token owner can't buy");
+			alert("해당 NFT의 소유자입니다!");
 
-		else if (window.confirm("confirm on buy")) {
+		else if (window.confirm("정말 구매 하시겠습니까?")) {
+			try {
+				const response = await props.contract.methods.buyNftToken(id).send({ from: props.account, value: weiPrice });
 
-			// if(!props.ApprovalState)
-			if(!isApproved)
-				alert("approveState is false");
-			else
-				try {
-					const response = await props.contract.methods.buyNftToken(id).send({ from: props.account, value: weiPrice });
-
-					if(response.status) {
-						window.location.replace("/mypage");
-					}
-				} catch(err) {
-					console.log(err);
-					throw err;
+				if(response.status) {
+					window.location.replace("/mypage");
 				}
+			} catch(err) {
+				console.log(err);
+				throw err;
+			}
 		}
 		else {
-		  alert("Cancel");
+		  alert("거래를 취소하셨습니다.");
 		}
 	  };
 
@@ -363,7 +329,7 @@ function Detail(props) {
 					<DetailButton/>
 					<React.Fragment>
 						<SellButton/>{' '}
-						<Modal open={modalOpen} close={closeModal} header="판매 정보 등록">
+						<Modal open={modalOpen} close={closeSellModal} header="판매 정보 등록">
 							<img className = "detail__image" src = {"https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/" + id + ".png"}/>
 							<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
 							<Button variant ="outline-warning" onClick = {nft_sell} >등록</Button>
@@ -372,7 +338,7 @@ function Detail(props) {
 
 					<React.Fragment>
 						<EditButton/>{' '}
-						<Modal open={edit_modal_open} close={closeModal2} header="판매 가격 변경">
+						<Modal open={edit_modal_open} close={closeEditModal} header="판매 가격 변경">
 							<img className = "detail__image" src = {"https://soksak.mypinata.cloud/ipfs/QmPvyY9EZTkgVVKcghFwiymhhyQeyg3M2QJcZCMwEHPHsu/" + id + ".png"}/>
 							<input onChange={onChange} value = {text} placeholder = "가격 입력"/>
 							<Button variant ="outline-warning" onClick = {nft_change_price} >가격 변경</Button>

@@ -17,29 +17,29 @@ const contact= function() {
           success.classList.add('show');
           button.classList.add('show');
           failed.classList.remove('show');
-alert("Your message has been sent...");
+          alert("Your message has been sent...");
       }, (error) => {
           console.log(error.text);
           failed.classList.add('show');
-alert("Message failed...");
+          alert("Message failed...");
       });
   }
 
   return (
   
-<div className='ContactUs'>
-<Container style={{padding: '0px'}}>
-<div>
-  <img src={ require('./image/contactus.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
-</div>
-</Container>
-<Container fluid>
-<Col>
-  <h7>   </h7>
-</Col>
-</Container>
-  
-<Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '0px'}}>
+      <div className='ContactUs'>
+      <Container style={{padding: '0px'}}>
+      <div>
+        <img src={ require('./image/contactus.png') } width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+      </div>
+      </Container>
+      <Container fluid>
+      <Col>
+        <h7>   </h7>
+      </Col>
+      </Container>
+        
+      <Container style={{marginBottom : '20px' , border : '1px solid #d9d9d9', padding: '0px'}}>
 
 
       <div class = "container-fluid">

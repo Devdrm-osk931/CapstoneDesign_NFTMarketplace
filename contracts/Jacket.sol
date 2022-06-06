@@ -21,10 +21,6 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         }
     }
 
-    function getmintedId() public view returns (uint256) {
-        return mintedId;
-    }
-
     function mint() public {
         require(numArray.length > 0, "Image is sold out.");
         uint256 random = uint256(
@@ -39,34 +35,10 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
         mintedId = id;
     }
 
-    // function publicMint(uint256 num) public {
-    //     require(numArray.length >= num, "too many minting");
-    //     for (uint256 i = 0; i < num; i++) {
-    //         uint256 random = uint256(
-    //             keccak256(
-    //                 abi.encodePacked(
-    //                     block.difficulty,
-    //                     block.timestamp,
-    //                     numArray
-    //                 )
-    //             )
-    //         ) % numArray.length;
-    //         _safeMint(msg.sender, numArray[random]);
-    //         numArray[random] = numArray[numArray.length - 1];
-    //         numArray.pop();
-    //     }
-    // }
+    function getmintedId() public view returns (uint256) {
+    return mintedId;
+    }
 
-    // function mint() public returns (uint256) {
-    //     _tokenIds.increment();
-    //     uint256 newItemId = _tokenIds.current();
-    //     _safeMint(msg.sender, newItemId);
-    //     return newItemId;
-    // }
-
-    // function setBaseURI(string memory baseURI_) external onlyOwner {
-    //     baseURI = baseURI_;
-    // }
 
     function _baseURI() internal view virtual override returns (string memory) {
         return
@@ -219,8 +191,8 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
             addr_owner == msg.sender,
             "msg.sender is not the owner of the token"
         );
-        _burn(_tokenId);
         removeToken(_tokenId);
+        _burn(_tokenId);
         numArray.push(_tokenId);
     }
 
@@ -232,9 +204,6 @@ contract Jacket is ERC721, ERC721Enumerable, Ownable {
                 for (uint256 j = i; j < onSaleNftTokenArray.length - 1; j++) {
                     onSaleNftTokenArray[j] = onSaleNftTokenArray[j + 1];
                 }
-                // onSaleNftTokenArray[i] = onSaleNftTokenArray[
-                //     onSaleNftTokenArray.length - 1
-                // ];
                 onSaleNftTokenArray.pop();
             }
         }

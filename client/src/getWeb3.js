@@ -17,7 +17,6 @@ const getWeb3 = () =>
         }
         window.ethereum.on("accountsChanged", function (accounts) {
           console.log('accountsChanges', accounts);
-          // window.location.reload();
           window.location.href = '/'
         })
       }
