@@ -29,8 +29,8 @@ const Minting = (props) => {
     }
 
 	const public_mint = async() => {
-		console.log("text", typeof(text));
-        await props.contract.methods.publicMint(text).send({ from: props.account, gas:300000});
+        await props.contract.methods.publicMint(text).send({ from: props.account });
+		window.location.replace('/mypage');
     }
 
 
@@ -67,10 +67,10 @@ const Minting = (props) => {
 					mint_10()
 				}}>Test</Button>
 
-				{/* <form>
-					<input onChange={onChange} value={text} placeholder = "ë¯¼íŒ… ê°œìˆ˜"/>
-					<Button varient = "outline-warning" onClick = {public_mint}>ë‹¤ì¤‘ ë¯¼íŒ…</Button>
-				</form> */}
+				<form>
+					<input onChange={onChange} value={text} placeholder = "¹ÎÆÃ °³¼ö"/>
+					<Button varient = "outline-warning" onClick = {public_mint}>´ÙÁß ¹ÎÆÃ</Button>
+				</form>
 
 			</div>
 		</div>

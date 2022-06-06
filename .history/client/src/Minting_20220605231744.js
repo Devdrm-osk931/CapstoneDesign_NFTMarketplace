@@ -29,7 +29,6 @@ const Minting = (props) => {
     }
 
 	const public_mint = async() => {
-		console.log("text", typeof(text));
         await props.contract.methods.publicMint(text).send({ from: props.account, gas:300000});
     }
 
@@ -67,10 +66,10 @@ const Minting = (props) => {
 					mint_10()
 				}}>Test</Button>
 
-				{/* <form>
+				<form>
 					<input onChange={onChange} value={text} placeholder = "민팅 개수"/>
 					<Button varient = "outline-warning" onClick = {public_mint}>다중 민팅</Button>
-				</form> */}
+				</form>
 
 			</div>
 		</div>
