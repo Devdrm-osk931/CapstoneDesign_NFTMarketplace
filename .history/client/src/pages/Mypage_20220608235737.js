@@ -89,7 +89,7 @@ function Mypage(props) {
 		<div className ='Mypage'>
 			<Container style={{padding: '0px'}}>
 				<div>
-					<img src='/img/mypage.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+					<img src='./img/mypage.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
 				</div>
 			</Container>
 

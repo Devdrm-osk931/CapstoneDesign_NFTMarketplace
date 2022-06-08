@@ -7,7 +7,7 @@ function AboutUs(){
         <div>
         <Container style={{padding: '0px'}}>
         <div>
-        <img src='/img/aboutus.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        <img src='./img/aboutus.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
         </div>
         </Container>
 
@@ -19,7 +19,7 @@ function AboutUs(){
 
         <Container style={{padding: '0px'}}>
         <div>
-        <img src= '/img/aboutusins.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        <img src= './img/aboutusins.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
         </div>
         </Container>
 

@@ -30,7 +30,7 @@ const contact= function() {
       <div className='ContactUs'>
       <Container style={{padding: '0px'}}>
       <div>
-        <img src='/img/contactus.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
+        <img src='./img/contactus.png' width='100%' height='100%' alt="mainlogo" margin-bottom= "20px"/>
       </div>
       </Container>
       <Container fluid>

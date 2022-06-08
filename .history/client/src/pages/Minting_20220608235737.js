@@ -42,8 +42,8 @@ const Minting = (props) => {
 		<div>
 		<Container style={{padding: '0px'}}>
 		<div>
-		<img src='/img/minting.png' style = {{width:'100%', height:'100%', alt:"mainlogo", marginBottom: "20px", textAlign: 'center'}} />
-		<img src='/img/mintingins.png' style = {{width:'100%', height:'100%', alt:"mainlogo", marginBottom: "20px", textAlign: 'center'}}/>
+		<img src='./img/minting.png' style = {{width:'100%', height:'100%', alt:"mainlogo", marginBottom: "20px", textAlign: 'center'}} />
+		<img src='./img/mintingins.png' style = {{width:'100%', height:'100%', alt:"mainlogo", marginBottom: "20px", textAlign: 'center'}}/>
 		</div>
 		</Container>
 			<div style = {{marginRight: '60px'}}>

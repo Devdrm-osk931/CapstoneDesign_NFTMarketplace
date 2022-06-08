@@ -15,7 +15,7 @@ function Footer(){
                         <div className="row mt-4">
 
                             <div className="col-lg-3 col-md-6 mb-4 mb-md-0" style = {{}}>
-                                <img src = "/img/footerlogo.png"/>
+                                <img src = "./img/footerlogo.png"/>
                                 <p><i>© 2022 Copyright: SOKSAK</i></p>
 
                                 <a className="btn btn-outline-light btn-floating m-1 text-white"

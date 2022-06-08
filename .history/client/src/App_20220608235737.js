@@ -102,7 +102,7 @@ class App extends Component {
 
         <Navbar className="navbar-custom sticky-top" expand="lg">
         <Container>
-          <Navbar.Brand href="/"><img src='/img/Logo.png' style = {{width:'45px', height:'45px'}}></img></Navbar.Brand>
+          <Navbar.Brand href="/"><img src='./img/Logo.png' style = {{width:'45px', height:'45px'}}></img></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
