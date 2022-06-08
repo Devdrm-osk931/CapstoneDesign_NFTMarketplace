@@ -19,19 +19,19 @@ function Footer(){
                                 <p><i>© 2022 Copyright: SOKSAK</i></p>
 
                                 <a className="btn btn-outline-light btn-floating m-1 text-white"
-                                                role="button"><i className="fab fa-facebook-f"></i></a>
+                                                role="button" href='https://www.facebook.com/seokkyo.oh/'><i className="fab fa-facebook-f"></i></a>
 
                 
                                 <a className="btn btn-outline-light btn-floating m-1 text-white"
-                                                role="button"><i className="fab fa-twitter"></i></a>
+                                                role="button" href='https://www.twitter.com'><i className="fab fa-twitter"></i></a>
 
                     
                                 <a className="btn btn-outline-light btn-floating m-1 text-white"
-                                                role="button"><i className="fab fa-google"></i></a>
+                                                role="button" href='https://twitter.com/osk931'><i className="fab fa-google"></i></a>
 
                     
                                 <a className="btn btn-outline-light btn-floating m-1 text-white"
-                                                role="button"><i className="fab fa-instagram"></i></a>
+                                                role="button" href="https://www.instagram.com/o.o.o.team1/"><i className="fab fa-instagram"></i></a>
                             </div>
                     
 
