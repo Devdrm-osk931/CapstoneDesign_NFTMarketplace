@@ -64,7 +64,7 @@ const contact= function() {
            <div class="padding40 box-rounded mb30">
               <address classname = "sector">
               <h3>Personal Office</h3>
-                😊<a href="https://www.instagram.com/o.o.o.team1/">Manager</a><br></br>
+                😊<a href="https://www.facebook.com/seokkyo.oh//">Manager</a><br></br>
                 😊<a href="https://www.instagram.com/o.o.o.team2/">Front-End Team1</a><br></br>
                 😊<a href="https://www.instagram.com/o.o.o.team2/">Front-End Team2</a><br></br>
                 😊<a href ="https://www.instagram.com/o.o.o.team3/">Back-End Team1</a><br></br>
