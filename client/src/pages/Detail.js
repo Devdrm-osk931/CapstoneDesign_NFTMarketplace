@@ -114,7 +114,7 @@ function Detail(props) {
 
 
 	const getinformation =async()=>{
-		await axios.get('https://gateway.pinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/'+id+'.json')
+		await axios.get('https://soksak.mypinata.cloud/ipfs/QmTPfn16CPYFt1gKmhuSJTxDqzwk6xEdN9ZNK3fntHhpvj/'+id+'.json')
 		.then((Response)=>{
 			setInformation(Response.data.attributes);
 		})
@@ -324,6 +324,7 @@ function Detail(props) {
 					<div class="col"><PrintCollege/></div>
 					<div class="col"><PrintStudent_ID/></div>
 				</div>
+				<br/>
 
 				<div className= "Detail__button">
 					<DetailButton/>
