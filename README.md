@@ -1,4 +1,4 @@
 # CapstoneDesign_NFTMarketplace
 Design NFT Marketplace
 
-pre-final
+Final Version
